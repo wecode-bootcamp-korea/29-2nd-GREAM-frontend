@@ -4,6 +4,7 @@ import Nav from './components/Nav/Nav';
 import ScrollToTop from './components/ScrollToTop./ScrollToTop';
 import ProductDetail from './pages/ProductDetail/ProductDetail';
 import ProductsList from './pages/ProductsList/ProductsList';
+import OAuthHandler from './components/Nav/Login/OauthHandler';
 
 const Router = () => {
   return (
@@ -13,6 +14,7 @@ const Router = () => {
       <Routes>
         <Route path="/detail" element={<ProductDetail />} />
         <Route path="/list" element={<ProductsList />} />
+        <Route path="/oauth" element={<OAuthHandler />} />
       </Routes>
     </BrowserRouter>
   );

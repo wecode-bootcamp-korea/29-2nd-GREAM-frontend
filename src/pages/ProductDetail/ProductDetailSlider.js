@@ -17,22 +17,19 @@ const ProductDetailSlider = ({ product }) => {
   };
 
   return (
-    <>
-      <h2>Single Item</h2>
-      <Container>
-        <StyledSlider {...settings}>
-          {product.img.map((product, idx) => {
-            return (
-              <div key={idx}>
-                <ImageContainer>
-                  <Image src={product} alt="제품이미지" />
-                </ImageContainer>
-              </div>
-            );
-          })}
-        </StyledSlider>
-      </Container>
-    </>
+    <Container>
+      <StyledSlider {...settings}>
+        {product?.images.map(product => {
+          return (
+            <div key={product.id}>
+              <ImageContainer>
+                <Image src={product.url} alt="제품이미지" />
+              </ImageContainer>
+            </div>
+          );
+        })}
+      </StyledSlider>
+    </Container>
   );
 };
 

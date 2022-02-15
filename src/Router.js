@@ -12,7 +12,7 @@ const Router = () => {
       <ScrollToTop />
       <Nav />
       <Routes>
-        <Route path="/detail" element={<ProductDetail />} />
+        <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/list" element={<ProductsList />} />
         <Route path="/oauth" element={<OAuthHandler />} />
       </Routes>

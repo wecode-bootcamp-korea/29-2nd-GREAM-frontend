@@ -1,14 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-const FavoriteBtn = ({
-  children,
-  color,
-  size,
-  outline,
-  fullWidth,
-  ...rest
-}) => {
+const Btn = ({ children, color, outline, fullWidth, size, ...rest }) => {
   return (
     <StyledButton
       color={color}
@@ -21,9 +14,9 @@ const FavoriteBtn = ({
     </StyledButton>
   );
 };
-export default FavoriteBtn;
+export default Btn;
 
-FavoriteBtn.defaultProps = {
+Btn.defaultProps = {
   color: 'white',
   size: 'medium',
 };

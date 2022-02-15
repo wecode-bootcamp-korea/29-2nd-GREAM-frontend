@@ -1,20 +1,46 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Btn from './Btn';
 import { faBookmark as farBookmark } from '@fortawesome/free-regular-svg-icons';
 import { faBookmark as fasBookmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const FavoriteModal = ({
+const MarketPriceModal = ({
   title,
+  productId,
   productName,
   productImg,
   productSizes,
-  confirmText,
   onConfirm,
-  btnClick,
-  isClickBtn,
 }) => {
+  const [isClickBtn, setIsClickBtn] = useState({
+    Small: false,
+    Medium: false,
+    Large: false,
+  });
+
+  const btnClick = e => {
+    e.preventDefault();
+    const selectedBtn = e.currentTarget.getAttribute('name');
+    setIsClickBtn(prev => {
+      return {
+        ...prev,
+        [selectedBtn]: !prev[selectedBtn],
+      };
+    });
+    fetch('http://localhost:3003/wishlist', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: sessionStorage.getItem('token'),
+      },
+      body: JSON.stringify({
+        product_id: productId,
+        size_id: 2,
+      }),
+    }).then(res => res.json());
+  };
+
   useEffect(() => {
     document.body.style.cssText = `
       position: fixed; 
@@ -37,7 +63,7 @@ const FavoriteModal = ({
         <ModalContent>
           <ProductInfo>
             <SuggestItem>
-              <img alt="제품이미지" src={productImg?.url} />
+              <img alt="제품이미지" src={productImg} />
               <span>{productName}</span>
             </SuggestItem>
           </ProductInfo>
@@ -49,39 +75,36 @@ const FavoriteModal = ({
                   key={size.id}
                   name={size.name}
                   value={size.id}
-                  color="lightGrey"
                   outline
+                  color="lightGrey"
                   fullWidth
                 >
-                  <>
-                    <span>{size.name}</span>
-                    <span>
-                      <FontAwesomeIcon
-                        icon={isClickBtn[size.name] ? fasBookmark : farBookmark}
-                        size="1x"
-                      />
-                    </span>
-                  </>
+                  {isClickBtn[size.name] ? (
+                    <>
+                      <span>{size.name}</span>
+                      <span>
+                        <FontAwesomeIcon icon={fasBookmark} size="1x" />
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <span>{size.name}</span>
+                      <span>
+                        <FontAwesomeIcon icon={farBookmark} size="1x" />
+                      </span>
+                    </>
+                  )}
                 </MarginBtn>
               );
             })}
           </ProductSize>
-          <ModalBottom>
-            <ConfirmBtn
-              onClick={onConfirm}
-              name="favoriteModalBtn"
-              color="lightGrey"
-              outline
-            >
-              <span>{confirmText}</span>
-            </ConfirmBtn>
-          </ModalBottom>
+          <ModalBottom />
         </ModalContent>
       </Wrapper>
     </DarkBackground>
   );
 };
-export default FavoriteModal;
+export default MarketPriceModal;
 
 const DarkBackground = styled.div`
   position: fixed;
@@ -147,16 +170,6 @@ const ProductSize = styled.div`
   align-items: center;
 `;
 
-const ConfirmBtn = styled(Btn)`
-  width: 100px;
-  height: 42px;
-  display: flex;
-  justify-content: center;
-  color: ${({ theme }) => theme.palette.black};
-  &:active {
-    background-color: ${({ theme }) => theme.palette.lightGrey2};
-  }
-`;
 const MarginBtn = styled(Btn)`
   margin: 20px 4px 10px 4px;
   width: 100%;

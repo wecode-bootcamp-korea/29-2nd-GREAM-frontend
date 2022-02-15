@@ -157,6 +157,7 @@ const ConfirmBtn = styled(Btn)`
     background-color: ${({ theme }) => theme.palette.lightGrey2};
   }
 `;
+
 const MarginBtn = styled(Btn)`
   margin: 20px 4px 10px 4px;
   width: 100%;

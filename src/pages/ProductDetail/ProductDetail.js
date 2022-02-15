@@ -9,27 +9,55 @@ import { useParams } from 'react-router-dom';
 import BASE_URL from '../config';
 import SIZE_INFO from './sizeInfo';
 import BuyInfo from './BuyInfo';
+import MarketPrice from './MarketPrice';
 
 const ProductDetail = () => {
   const [productData, setProductData] = useState(null);
+  const [biddingData, setBiddingData] = useState(null);
   const [productBox, setProductBox] = useState([]);
   const [isToggle, setIsToggle] = useState({
     favoriteModalBtn: false,
     marketPriceBtn: false,
   });
-
   const [isClickBtn, setIsClickBtn] = useState({
     Small: false,
     Medium: false,
     Large: false,
   });
 
-  const { id } = useParams();
+  const [handleSize, setHandleSize] = useState(0);
+  const [modalTabId, setModalTabId] = useState(1);
+
+  const { id } = useParams(1);
+
+  useEffect(() => {
+    fetch(`${BASE_URL}products/${id}`)
+      .then(res => res.json())
+      .then(data => {
+        setProductData(data);
+      });
+  }, [id]);
+
+  useEffect(() => {
+    fetch('/data/Products.json')
+      .then(res => res.json())
+      .then(data => {
+        setProductBox(data);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch(`${BASE_URL}products/${id}/order`)
+      .then(res => res.json())
+      .then(data => setBiddingData(data.orders));
+  }, [id]);
+
   const productImg = productData?.images?.[0];
   const productName = productData?.name;
   const productId = productData?.product_id;
+  const productAuthor = productData?.author;
   const productInterestedNum = productData?.wishlist.length;
-
+  const isModalOpen = isToggle.marketPriceBtn === true;
   localStorage.setItem(productId, JSON.stringify(isClickBtn));
   const savedBookMark = JSON.parse(localStorage.getItem(productId));
   const isCheckedBookMark = Object.values(savedBookMark).indexOf(true);
@@ -49,6 +77,7 @@ const ProductDetail = () => {
     }
     return 0;
   };
+
   const renderNumber = renderInterestedNum(productInterestedNum);
 
   const clickToggle = e => {
@@ -104,7 +133,6 @@ const ProductDetail = () => {
         [selectedBtn]: !prev[selectedBtn],
       };
     });
-
     fetch(`${BASE_URL}products/follow`, {
       method: 'POST',
       headers: {
@@ -112,11 +140,37 @@ const ProductDetail = () => {
         Authorization: sessionStorage.getItem('token'),
       },
       body: JSON.stringify({
-        user_id: 2,
+        user_id: 501,
         product_id: Number(productId),
         size_id: Number(selectedSize),
       }),
     }).then(res => res.json());
+  };
+
+  const getModalTabIdState = id => {
+    setModalTabId(id);
+  };
+
+  const changeTable = id => {
+    getModalTabIdState(id);
+  };
+
+  const handleMarketPriceBtn = e => {
+    if (e.name === 'All') {
+      fetch(`${BASE_URL}products/${id}/order`)
+        .then(res => res.json())
+        .then(data => {
+          setBiddingData(data.orders);
+        });
+      setHandleSize(e.name);
+    } else {
+      fetch(`${BASE_URL}products/${id}/order?size=${e.id}`)
+        .then(res => res.json())
+        .then(data => {
+          setBiddingData(data.orders);
+        });
+      setHandleSize(e.name);
+    }
   };
 
   const ModalListObj = {
@@ -136,11 +190,18 @@ const ProductDetail = () => {
     marketPriceModal: (
       <MarketPriceModal
         title="시세"
+        productAuthor={productAuthor}
         productName={productName}
         productImg={productImg}
-        productSizes={SIZE_INFO}
-        productId={productId}
+        buttonTitle={BUTTONTITLE}
+        biddingData={biddingData}
+        setBiddingData={setBiddingData}
         onConfirm={onModalConfirm}
+        modalTabId={modalTabId}
+        changeTable={changeTable}
+        isModalOpen={isModalOpen}
+        handleMarketPriceBtn={handleMarketPriceBtn}
+        handleSize={handleSize}
       />
     ),
   };
@@ -163,15 +224,24 @@ const ProductDetail = () => {
             sizeBox={sizeBox}
             setSizeBox={setSizeBox}
           />
+          <MarketPrice
+            buttonTitle={BUTTONTITLE}
+            modalTabId={modalTabId}
+            biddingData={biddingData}
+            changeTable={changeTable}
+            getModalTabIdState={getModalTabIdState}
+            handleMarketPriceBtn={handleMarketPriceBtn}
+            handleSize={handleSize}
+          />
           <MarketPriceBtnWrapper>
             <HeightMarketPriceBtn
               color="lightGrey"
+              name="marketPriceBtn"
+              onClick={clickToggle}
               outline
               fullWidth
-              onClick={clickToggle}
-              name="marketPriceBtn"
             >
-              <span>체결 내역 더보기</span>
+              <span>입찰 내역 더보기</span>
             </HeightMarketPriceBtn>
           </MarketPriceBtnWrapper>
           <BuyInfo />
@@ -184,6 +254,12 @@ const ProductDetail = () => {
 };
 
 export default ProductDetail;
+
+const BUTTONTITLE = [
+  { id: 1, title: '최근거래' },
+  { id: 2, title: '구매 입찰' },
+  { id: 3, title: '판매 입찰' },
+];
 
 const Main = styled.div`
   margin: 0;
@@ -212,7 +288,6 @@ const InfoWrraper = styled.div`
 const MarketPriceBtnWrapper = styled.div`
   width: 563px;
   margin: 0 auto;
-  margin-top: 40px;
   padding: 0;
 `;
 

@@ -7,11 +7,50 @@
       "/images/jihong/Img_2.jpg",
       "/images/jihong/Img_3.jpg"
     ],
+    "releasedPrice": 3000000,
     "size": [
-      { "id": 1, "name": "Small", "price": 2000000 },
-      { "id": 2, "name": "Medium", "price": 3000000 },
-      { "id": 3, "name": "Large", "price": 4000000 }
+      {
+        "id": 1,
+        "name": "Small",
+        "price": 2000000,
+        "iskeep": false
+      },
+      {
+        "id": 2,
+        "name": "Medium",
+        "price": 3000000,
+        "iskeep": false
+      },
+      {
+        "id": 3,
+        "name": "Large",
+        "price": 4000000,
+        "iskeep": false
+      }
     ],
     "totalinterestednum": 30000
-  }
+  },
+  "wishlist": [
+    {
+      "id": 1,
+      "product_id": 1,
+      "size_id": 1,
+      "size_name": "Small"
+    },
+    {
+      "product_id": 1,
+      "size_id": 2,
+      "id": 2
+    },
+    {
+      "product_id": 1,
+      "size_id": 2,
+      "id": 3
+    },
+    {
+      "product_id": 1,
+      "size_id": 2,
+      "id": 4
+    }
+  ]
 }

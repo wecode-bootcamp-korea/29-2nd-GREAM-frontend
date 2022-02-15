@@ -79,21 +79,15 @@ const MarketPriceModal = ({
                   color="lightGrey"
                   fullWidth
                 >
-                  {isClickBtn[size.name] ? (
-                    <>
-                      <span>{size.name}</span>
-                      <span>
-                        <FontAwesomeIcon icon={fasBookmark} size="1x" />
-                      </span>
-                    </>
-                  ) : (
-                    <>
-                      <span>{size.name}</span>
-                      <span>
-                        <FontAwesomeIcon icon={farBookmark} size="1x" />
-                      </span>
-                    </>
-                  )}
+                  <>
+                    <span>{size.name}</span>
+                    <span>
+                      <FontAwesomeIcon
+                        icon={isClickBtn[size.name] ? fasBookmark : farBookmark}
+                        size="1x"
+                      />
+                    </span>
+                  </>
                 </MarginBtn>
               );
             })}

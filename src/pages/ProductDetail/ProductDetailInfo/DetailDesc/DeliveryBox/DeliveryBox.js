@@ -28,7 +28,7 @@ const OutBox = styled.div`
 
 const Comment = styled.p`
   font-size: ${({ theme }) => theme.fontsize.fontSize1};
-  color: ${({ theme }) => theme.palette.grey};
+  color: ${({ theme }) => theme.palette.darkGrey};
 `;
 
 const Fast = styled.div`
@@ -37,7 +37,7 @@ const Fast = styled.div`
 
   .bolt {
     color: ${({ theme }) => theme.palette.green};
-    font-size: 28px;
+    font-size: 33px;
     margin-top: 8px;
   }
 

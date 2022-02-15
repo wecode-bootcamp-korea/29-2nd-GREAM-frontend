@@ -36,8 +36,8 @@ const StyledOutBox = styled.div`
 
 const NumComment = styled.div`
   font-size: 12px;
-  color: ${({ theme }) => theme.grey};
-  border-right: 0.2px solid ${({ theme }) => theme.grey};
+  color: ${({ theme }) => theme.palette.grey};
+  border-right: 0.2px solid ${({ theme }) => theme.palette.lightGrey};
   line-height: 24px;
 
   ${props =>
@@ -49,7 +49,7 @@ const NumComment = styled.div`
 
 const Num = styled.div`
   font-size: ${({ theme }) => theme.fontsize2};
-  border-right: 0.2px solid ${({ theme }) => theme.grey};
+  border-right: 0.2px solid ${({ theme }) => theme.palette.lightGrey};
 
   ${props =>
     props.primary &&

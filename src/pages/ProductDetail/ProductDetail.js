@@ -71,7 +71,7 @@ const ProductDetail = () => {
     fetch(`${BASE_URL}products/${id}`)
       .then(res => res.json())
       .then(data => {
-        setProductData(data);
+        setProductBox(data);
       });
   };
 
@@ -135,70 +135,131 @@ const ProductDetail = () => {
     ),
   };
 
+  const btnClick = e => {
+    e.preventDefault();
+    const selectedBtn = e.currentTarget.getAttribute('name');
+    const selectedSize = e.currentTarget.getAttribute('value');
+
+    setIsClickBtn(prev => {
+      return {
+        ...prev,
+        [selectedBtn]: !prev[selectedBtn],
+      };
+    });
+
+    fetch(`${BASE_URL}products/follow`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: sessionStorage.getItem('token'),
+      },
+      body: JSON.stringify({
+        user_id: 2,
+        product_id: Number(productId),
+        size_id: Number(selectedSize),
+      }),
+    }).then(res => res.json());
+  };
+
+  const ModalListObj = {
+    favoriteModal: (
+      <FavoriteModal
+        title="관심 상품 추가"
+        confirmText="확인"
+        productName={productName}
+        productImg={productImg}
+        productSizes={SIZE_INFO}
+        productId={productId}
+        onConfirm={onModalConfirm}
+        btnClick={btnClick}
+        isClickBtn={isClickBtn}
+      />
+    ),
+    marketPriceModal: (
+      <MarketPriceModal
+        title="시세"
+        productName={productName}
+        productImg={productImg}
+        productSizes={SIZE_INFO}
+        productId={productId}
+        onConfirm={onModalConfirm}
+      />
+    ),
+  };
+
   return (
-    <>
-      {productData === null ? (
-        <h4>상품 상세페이지를 로딩중입니다.</h4>
-      ) : (
-        <ProductDetailSlider product={productData} />
-      )}
-      <FavoriteBtnWrapper>
-        <HeightFavoriteBtn
-          color="lightGrey"
-          outline
-          fullWidth
-          onClick={clickToggle}
-          name="favoriteModalBtn"
-        >
-          {isCheckedBookMark !== -1 ? (
-            <span>
-              <FontAwesomeIcon icon={fasBookmark} size="1x" />
-            </span>
-          ) : (
-            <span>
-              <FontAwesomeIcon icon={farBookmark} size="1x" />
-            </span>
-          )}
-          <span>관심상품</span>
-          <span>{renderNumber}</span>
-        </HeightFavoriteBtn>
-      </FavoriteBtnWrapper>
-      {isToggle.favoriteModalBtn && ModalListObj.favoriteModal}
-      {/* {isToggle.marketPriceBtn && ModalListObj[2]}
-      <FavoriteBtnWrapper>
-        <HeightFavoriteBtn
-          color="lightGrey"
-          outline
-          fullWidth
-          onClick={clickToggle}
-          name="marketPriceBtn"
-        >
-          <>
-            <span>
-              <FontAwesomeIcon icon={farBookmark} size="1x" />
-            </span>
-            <span>체결 내역 더보기</span>
-          </>
-        </HeightFavoriteBtn>
-      </FavoriteBtnWrapper> */}
-    </>
+    <Main>
+      <MainContent>
+        {productData && (
+          <SliderWrapper>
+            <ProductDetailSlider product={productData} />
+          </SliderWrapper>
+        )}
+        <InfoWrraper>
+          <ProductDetailInfo
+            productBox={productBox}
+            setProductBox={setProductBox}
+            clickToggle={clickToggle}
+            isCheckedBookMark={isCheckedBookMark}
+            renderNumber={renderNumber}
+          />
+          <MarketPriceBtnWrapper>
+            <HeightMarketPriceBtn
+              color="lightGrey"
+              outline
+              fullWidth
+              onClick={clickToggle}
+              name="marketPriceBtn"
+            >
+              <span>체결 내역 더보기</span>
+            </HeightMarketPriceBtn>
+          </MarketPriceBtnWrapper>
+          <BuyInfo />
+        </InfoWrraper>
+        {isToggle.favoriteModalBtn && ModalListObj.favoriteModal}
+        {isToggle.marketPriceBtn && ModalListObj.marketPriceModal}
+      </MainContent>
+    </Main>
   );
 };
 
 export default ProductDetail;
 
-const FavoriteBtnWrapper = styled.div`
-  width: 560px;
-  margin: 0 auto;
-  margin-top: 40px;
-  padding: 10px;
+const Main = styled.div`
+  margin: 0;
+  padding: 0;
 `;
 
-const HeightFavoriteBtn = styled(Btn)`
-  height: 60px;
+const MainContent = styled.div`
+  margin: 0 auto;
+  padding: 30px 40px 120px;
+  max-width: 1280px;
+  display: flex;
+`;
+
+const SliderWrapper = styled.div`
+  padding-right: 3%;
+`;
+
+const InfoWrraper = styled.div`
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  border-left: 1px solid #ebebeb;
+  padding-left: 3%;
+`;
+
+const MarketPriceBtnWrapper = styled.div`
+  width: 563px;
+  margin: 0 auto;
+  margin-top: 40px;
+  padding: 0;
+`;
+
+const HeightMarketPriceBtn = styled(Btn)`
+  height: 40px;
   span {
-    font-size: ${({ theme }) => theme.fontsize.fontSize2};
-    color: ${({ theme }) => theme.palette.black};
-    margin-left: 4px;
+    font-size: ${({ theme }) => theme.fontsize.fontSize1};
+    color: ${({ theme }) => theme.palette.darkGrey};
   }
 `;

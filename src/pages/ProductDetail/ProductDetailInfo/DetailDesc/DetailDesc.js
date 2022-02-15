@@ -20,14 +20,14 @@ const DescContainer = styled.div`
 `;
 
 const DescComment = styled.div`
-  font-size: ${({ theme }) => theme.fontSize4};
+  font-size: ${({ theme }) => theme.fontsize.fontSize4};
   font-weight: 700;
-  padding: 22px 0;
+  padding: 39px 0 13px 0;
 `;
 
 const DescBox = styled.div`
-  border-top: 0.2px solid ${({ theme }) => theme.grey};
-  border-bottom: 0.2px solid ${({ theme }) => theme.grey};
+  border-top: 0.2px solid ${({ theme }) => theme.palette.lightGrey};
+  border-bottom: 0.2px solid ${({ theme }) => theme.palette.lightGrey};
 `;
 
 export default DetailDesc;

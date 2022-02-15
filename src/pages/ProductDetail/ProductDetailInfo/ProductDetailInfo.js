@@ -7,12 +7,20 @@ import Modal from 'react-modal';
 import ModalTop from './PurchaseModal/ModalTop';
 import ModalContents from './PurchaseModal/ModalContents';
 import PurchaseBtn from './PurchaseModal/PurchaseBtn';
+import Btn from '../Btn';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBookmark as farBookmark } from '@fortawesome/free-regular-svg-icons';
+import { faBookmark as fasBookmark } from '@fortawesome/free-solid-svg-icons';
 
-const ProductDetailInfo = ({ productBox }) => {
+const ProductDetailInfo = ({
+  productBox,
+  clickToggle,
+  isCheckedBookMark,
+  renderNumber,
+}) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [purchaseModal, setPurchaseModal] = useState(false);
   const [sizeModal, setSizeModal] = useState(false);
-
   const set = productBox[0]?.size[0]?.price;
   const [selectedSize, setSelectedSize] = useState(set && set);
 
@@ -86,37 +94,60 @@ const ProductDetailInfo = ({ productBox }) => {
           <ModalContents productBox={productBox} />
         </Modal>
       </AmountBox>
+      <FavoriteBtnWrapper>
+        <HeightFavoriteBtn
+          color="lightGrey"
+          outline
+          fullWidth
+          onClick={clickToggle}
+          name="favoriteModalBtn"
+        >
+          {isCheckedBookMark !== -1 ? (
+            <span>
+              <FontAwesomeIcon icon={fasBookmark} size="1x" />
+            </span>
+          ) : (
+            <span>
+              <FontAwesomeIcon icon={farBookmark} size="1x" />
+            </span>
+          )}
+          <span>관심상품</span>
+          <span>{renderNumber}</span>
+        </HeightFavoriteBtn>
+      </FavoriteBtnWrapper>
       <DetailDesc productBox={productBox} />
       <DeliveryBox />
     </ProductDetailInfoBox>
   );
 };
 
+export default ProductDetailInfo;
+
 const ProductDetailInfoBox = styled.div`
-  width: 45vw;
-  border-left: 0.2px solid ${({ theme }) => theme.palette.grey};
-  padding: 12px;
+  width: 100%;
+  padding-left: 0;
+  color: ${({ theme }) => theme.palette.black};
+  font-size: ${({ theme }) => theme.fontsize.fontSize1};
 `;
 
 const Brand = styled.div`
-  color: ${({ theme }) => theme.blackColor};
-  font-size: ${({ theme }) => theme.fontsize.fontSize4};
   font-weight: 900;
+  font-size: ${({ theme }) => theme.fontsize.fontSize4};
   text-decoration: 2px underline;
   margin-bottom: 10px;
 `;
 
 const Name = styled.div`
-  color: ${({ theme }) => theme.blackColor};
-  font-size: ${({ theme }) => theme.fontsize.fontSize4};
   margin-bottom: 20px;
+  color: ${({ theme }) => theme.palette.grey};
 `;
 
 const Size = styled.div`
   display: flex;
   justify-content: space-between;
-  border-bottom: 0.2px solid ${({ theme }) => theme.palette.grey};
-  padding-bottom: 13px;
+  align-items: flex-end;
+  border-bottom: 0.2px solid ${({ theme }) => theme.palette.lightGrey};
+  padding-bottom: 12px;
 `;
 
 const SizeComment = styled.span`
@@ -125,7 +156,7 @@ const SizeComment = styled.span`
 `;
 
 const ClickSizeBox = styled.button`
-  color: ${({ theme }) => theme.palette.darkGrey};
+  color: ${({ theme }) => theme.palette.black};
   font-size: ${({ theme }) => theme.fontsize.fontSize3};
   font-weight: 600;
   border: none;
@@ -139,7 +170,7 @@ const ClickSizeBox = styled.button`
 const TransactionAmountBox = styled.div`
   display: flex;
   justify-content: space-between;
-  padding-top: 15px;
+  padding-top: 16px;
 `;
 
 const TransactionAmountComment = styled.span`
@@ -156,7 +187,20 @@ const AmountBox = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 35px;
-  margin-bottom: 50px;
 `;
 
-export default ProductDetailInfo;
+const FavoriteBtnWrapper = styled.div`
+  width: 563px;
+  margin: 0 auto;
+  margin-top: 12px;
+  padding: 0;
+`;
+
+const HeightFavoriteBtn = styled(Btn)`
+  height: 60px;
+  span {
+    font-size: ${({ theme }) => theme.fontsize.fontSize2};
+    color: ${({ theme }) => theme.palette.black};
+    margin-left: 4px;
+  }
+`;

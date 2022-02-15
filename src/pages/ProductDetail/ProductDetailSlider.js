@@ -36,6 +36,8 @@ const ProductDetailSlider = ({ product }) => {
 const Container = styled.div`
   margin: 0 auto;
   width: 560px;
+  position: sticky;
+  top: 50px;
 `;
 
 const StyledSlider = styled(Slider)`

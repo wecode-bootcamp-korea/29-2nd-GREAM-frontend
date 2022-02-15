@@ -23,7 +23,7 @@ const ShippingBox = styled.div`
   font-size: ${({ theme }) => theme.fontsize.fontSize1};
   margin-left: 18px;
   padding-bottom: 20px;
-  border-bottom: 0.2px solid ${({ theme }) => theme.palette.grey};
+  border-bottom: 0.2px solid ${({ theme }) => theme.palette.lightGrey};
 
   div {
     line-height: 20px;
@@ -33,16 +33,17 @@ const ShippingBox = styled.div`
         margin-right: 5px;
 
         &:first-child {
-          font-weight: 700;
+          font-weight: 600;
         }
       }
     }
     &:last-child {
       span {
         margin-right: 5px;
+        color: ${({ theme }) => theme.palette.grey};
 
         &:last-child {
-          color: ${props => (props.fast ? '#297dcb' : 'black')};
+          color: ${props => (props.fast ? '#297dcb' : '#22222280')};
         }
       }
     }

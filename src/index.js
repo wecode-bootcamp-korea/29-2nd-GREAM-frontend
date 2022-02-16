@@ -4,6 +4,9 @@ import Router from './Router';
 import theme from './styles/theme';
 import GlobalStyle from './styles/Global';
 import { ThemeProvider } from 'styled-components';
+import ReactModal from 'react-modal';
+
+ReactModal.setAppElement('#root');
 
 ReactDOM.render(
   <>

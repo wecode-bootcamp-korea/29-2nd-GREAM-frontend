@@ -1,0 +1,46 @@
+[
+  {
+    "id": 1,
+    "author": "Vincent Van Gogh",
+    "product_name": "La chambre de Van Gogh a Arles",
+    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2tzEhvBhM6gLpVcCuokwKqoI-B-WWVdrH6g&usqp=CAU",
+    "size": [
+      {
+        "id": 1,
+        "size": "Small",
+        "price": 260000
+      },
+      {
+        "id": 2,
+        "size": "Medium",
+        "price": 450000
+      },
+      {
+        "id": 3,
+        "size": "Large",
+        "price": 630000
+      }
+    ],
+    "model_number": "DD1391-104",
+    "release_date": "22-01-22",
+    "release_price": 230000,
+    "material": "유화",
+    "transaction_amount": [
+      {
+        "id": 1,
+        "date": "22-02/01",
+        "amount": 250000
+      },
+      {
+        "id": 2,
+        "date": "22/02/02",
+        "amount": 270000
+      },
+      {
+        "id": 3,
+        "date": "22/02/04",
+        "amount": 290000
+      }
+    ]
+  }
+]

@@ -1,10 +1,17 @@
 {
   "message": {
     "id": 1,
+    "name": "Lorem Ipsum",
     "img": [
       "/images/jihong/Img_1.jpg",
       "/images/jihong/Img_2.jpg",
       "/images/jihong/Img_3.jpg"
-    ]
+    ],
+    "size": [
+      { "id": 1, "name": "Small", "price": 2000000 },
+      { "id": 2, "name": "Medium", "price": 3000000 },
+      { "id": 3, "name": "Large", "price": 4000000 }
+    ],
+    "totalinterestednum": 30000
   }
 }

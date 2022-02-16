@@ -45,41 +45,33 @@ const StyledSlider = styled(Slider)`
   .slick-slide div {
     outline: none;
   }
-
   .slick-prev {
     left: 0;
     width: 44px;
     z-index: 100;
   }
-
   .slick-next {
     right: 0;
     width: 44px;
   }
-
   .slick-prev::before {
     content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 44 44'%3E%3Cpath stroke='darkgrey' stroke-width='1.5' d='M27.5 33l-11-11 11-11'/%3E%3C/svg%3E");
   }
-
   .slick-next::before {
     content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 44 44'%3E%3Cpath stroke='darkgrey' stroke-width='1.5' d='M16.5 11l11 11-11 11'/%3E%3C/svg%3E");
   }
-
   .slick-prev.slick-disabled:before,
   .slick-next.slick-disabled:before {
     opacity: 0.75;
   }
-
   .slick-prev:hover,
   .slick-next:hover {
     opacity: 0.75;
   }
-
   .slick-prev.slick-disabled:hover,
   .slick-next.slick-disabled:hover {
     opacity: 1;
   }
-
   .slick-dots {
     padding: 0 16px;
     bottom: 12px;
@@ -89,17 +81,14 @@ const StyledSlider = styled(Slider)`
     width: 100%;
     padding: 0 16px;
   }
-
   .slick-dots:focus {
     color: darkgray;
   }
-
   .slick-dots > li {
     display: table-cell;
     vertical-align: top;
     cursor: default;
   }
-
   .slick-dots > li > button {
     vertical-align: top;
     width: 100%;
@@ -108,7 +97,6 @@ const StyledSlider = styled(Slider)`
     padding: 10px;
     cursor: default;
   }
-
   .slick-dots > li > button:before {
     content: '';
     width: 100%;
@@ -117,11 +105,9 @@ const StyledSlider = styled(Slider)`
     background-color: black;
     cursor: pointer;
   }
-
   .slick-dots > li > button:hover {
     opacity: 0.25;
   }
-
   .slick-dots > li > button:focus {
     opacity: 0.75;
   }

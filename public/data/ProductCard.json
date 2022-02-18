@@ -1,0 +1,62 @@
+[
+  {
+    "author": "Kathryn Rice",
+    "id": 1,
+    "name": "Managed cohesive policy",
+    "price": "50000000.00",
+    "product_image": [
+        {
+            "image": "https://gream-image.s3.ap-northeast-2.amazonaws.com/person.png"
+        }
+    ],
+    "wishlist": 0
+},
+{
+    "author": "Antonio Oneal",
+    "id": 2,
+    "name": "Switchable high-level collaboration",
+    "price": "45500000.00",
+    "product_image": [
+        {
+            "image": "https://gream-image.s3.ap-northeast-2.amazonaws.com/pop_culture.png"
+        }
+    ],
+    "wishlist": 0
+},
+{
+    "author": "Dalton Cuevas",
+    "id": 3,
+    "name": "Universal intermediate Internet solution",
+    "price": "89500000.00",
+    "product_image": [
+        {
+            "image": "https://gream-image.s3.ap-northeast-2.amazonaws.com/nature.png"
+        }
+    ],
+    "wishlist": 0
+},
+{
+    "author": "Lindsay Martin",
+    "id": 4,
+    "name": "Expanded object-oriented adapter",
+    "price": "13000000.00",
+    "product_image": [
+        {
+            "image": "https://gream-image.s3.ap-northeast-2.amazonaws.com/city.png"
+        }
+    ],
+    "wishlist": 0
+},
+{
+    "author": "Emily Clark",
+    "id": 5,
+    "name": "Team-oriented disintermediate intranet",
+    "price": "34250000.00",
+    "product_image": [
+        {
+            "image": "https://gream-image.s3.ap-northeast-2.amazonaws.com/daily_life.png"
+        }
+    ],
+    "wishlist": 0
+}
+]

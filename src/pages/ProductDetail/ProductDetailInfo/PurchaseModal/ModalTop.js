@@ -11,10 +11,10 @@ const ModalTop = ({ productBox }) => {
   return (
     <Top>
       <InfoOutBox>
-        <img src={productBox[0].img} alt="img" style={imgStyles} />
+        <img src={productBox?.images?.[0]?.url} alt="img" style={imgStyles} />
         <InfoBox>
-          <ModelNum>{productBox[0].model_number}</ModelNum>
-          <Name>{productBox[0].product_name}</Name>
+          <ModelNum>{productBox?.model_number}</ModelNum>
+          <Name>{productBox?.name}</Name>
         </InfoBox>
       </InfoOutBox>
     </Top>

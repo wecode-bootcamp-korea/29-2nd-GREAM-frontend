@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import ProductDetailInfo from './ProductDetailInfo/ProductDetailInfo';
 import ProductDetailSlider from './ProductDetailSlider';
 import styled from 'styled-components';
 import Btn from './Btn';
@@ -8,7 +9,6 @@ import { useParams } from 'react-router-dom';
 import BASE_URL from '../config';
 import SIZE_INFO from './sizeInfo';
 import BuyInfo from './BuyInfo';
-import ProductDetailInfo from '../ProductDetail/ProductDetailInfo/ProductDetailInfo';
 
 const ProductDetail = () => {
   const [productData, setProductData] = useState(null);
@@ -75,8 +75,18 @@ const ProductDetail = () => {
       });
   };
 
+  const [sizeBox, setSizeBox] = useState([]);
+
   useEffect(() => {
-    fetch(`${BASE_URL}products/${id}`)
+    fetch(`http://15.164.48.155:8080/products/size-price/1`)
+      .then(res => res.json())
+      .then(data => {
+        setSizeBox(data);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch(`http://15.164.48.155:8080/products/${id}`)
       .then(res => res.json())
       .then(data => {
         setProductData(data);
@@ -150,6 +160,8 @@ const ProductDetail = () => {
             clickToggle={clickToggle}
             isCheckedBookMark={isCheckedBookMark}
             renderNumber={renderNumber}
+            sizeBox={sizeBox}
+            setSizeBox={setSizeBox}
           />
           <MarketPriceBtnWrapper>
             <HeightMarketPriceBtn

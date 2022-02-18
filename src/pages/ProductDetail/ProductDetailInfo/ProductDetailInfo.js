@@ -7,22 +7,31 @@ import Modal from 'react-modal';
 import ModalTop from './PurchaseModal/ModalTop';
 import ModalContents from './PurchaseModal/ModalContents';
 import PurchaseBtn from './PurchaseModal/PurchaseBtn';
-import Btn from '../Btn';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBookmark as farBookmark } from '@fortawesome/free-regular-svg-icons';
-import { faBookmark as fasBookmark } from '@fortawesome/free-solid-svg-icons';
+import { faBookmark as farBookmark } from '@fortawesome/free-solid-svg-icons';
+import { faBookmark as fasBookmark } from '@fortawesome/free-regular-svg-icons';
+import Btn from '../Btn';
 
 const ProductDetailInfo = ({
   productBox,
+  sizeBox,
+  setProductBox,
   clickToggle,
   isCheckedBookMark,
   renderNumber,
 }) => {
-  const [modalOpen, setModalOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+
   const [purchaseModal, setPurchaseModal] = useState(false);
+  const [sellModal, setSellModal] = useState(false);
   const [sizeModal, setSizeModal] = useState(false);
-  const set = productBox[0]?.size[0]?.price;
-  const [selectedSize, setSelectedSize] = useState(set && set);
+
+  const [pickedSize, setPickedSize] = useState(null);
+
+  const SIZE_INIT = '모든 사이즈';
+  const [priceForTheSize, setPriceForTheSize] = useState(SIZE_INIT);
+
+  const [selectedSize, setSelectedSize] = useState('');
 
   const customStyles = {
     content: {
@@ -39,59 +48,82 @@ const ProductDetailInfo = ({
 
   return (
     <ProductDetailInfoBox>
-      <Brand>{productBox[0]?.author}</Brand>
-      <Name>{productBox[0]?.product_name}</Name>
+      <Brand>{productBox?.author}</Brand>
+      <Name>{productBox?.name}</Name>
       <Size>
         <SizeComment>사이즈</SizeComment>
         <ClickSizeBox onClick={() => setSizeModal(true)}>
-          모든 사이즈
+          {priceForTheSize}
         </ClickSizeBox>
       </Size>
       <TransactionAmountBox>
         <TransactionAmountComment>최근 거래가</TransactionAmountComment>
-        <TransactionAmount>286,000원</TransactionAmount>
+        <TransactionAmount>
+          {pickedSize !== null ? pickedSize : productBox?.recent_price}
+        </TransactionAmount>
       </TransactionAmountBox>
       <AmountBox>
-        <Button onClick={() => setModalOpen(true)} purchase>
+        <Button onClick={() => setPurchaseModal(true)}>
           <span style={margin}>구매</span>
-          <div>260,000원</div>
+          <div>{sizeBox?.buyer_size_price?.[0].price}</div>
         </Button>
-        <Button onClick={() => setPurchaseModal(true)} cell>
+        <Button onClick={() => setSellModal(true)} sell>
           <span style={margin}>판매</span>
-          <div>390,000원</div>
+          <div>{sizeBox?.seller_size_price?.[0].price}</div>
         </Button>
         <Modal
-          isOpen={modalOpen}
-          productBox={productBox}
-          onRequestClose={() => setModalOpen(false)}
+          isOpen={purchaseModal}
+          sizeBox={sizeBox}
+          onRequestClose={() => {
+            setPurchaseModal(false);
+            setIsOpen(false);
+          }}
           style={customStyles}
         >
           <ModalTop productBox={productBox} />
           <ModalContents
-            productBox={productBox}
+            sizeBox={sizeBox}
             setSelectedSize={setSelectedSize}
+            setPickedSize={setPickedSize}
+            setIsOpen={setIsOpen}
+            isOpen={isOpen}
           />
-          <PurchaseBtn
-            productBox={productBox}
-            selectedSize={selectedSize}
-            set={set}
-          />
+          {isOpen && (
+            <PurchaseBtn sizeBox={sizeBox} selectedSize={selectedSize} />
+          )}
         </Modal>
         <Modal
-          isOpen={purchaseModal}
-          productBox={productBox}
-          onRequestClose={() => setPurchaseModal(false)}
+          isOpen={sellModal}
+          sizeBox={sizeBox}
+          onRequestClose={() => setSellModal(false)}
           style={customStyles}
         >
-          <ModalContents productBox={productBox} />
+          <ModalContents
+            sizeBox={sizeBox}
+            setSelectedSize={setSelectedSize}
+            setIsOpen={setIsOpen}
+            isOpen={isOpen}
+            setPickedSize={setPickedSize}
+            sell
+          />
+          {isOpen && (
+            <PurchaseBtn sizeBox={sizeBox} selectedSize={selectedSize} isSell />
+          )}
         </Modal>
         <Modal
           isOpen={sizeModal}
-          productBox={productBox}
+          sizeBox={sizeBox}
           onRequestClose={() => setSizeModal(false)}
           style={customStyles}
         >
-          <ModalContents productBox={productBox} />
+          <ModalContents
+            sizeBox={sizeBox}
+            setSelectedSize={setSelectedSize}
+            setIsOpen={setIsOpen}
+            isOpen={isOpen}
+            setPickedSize={setPickedSize}
+            setPriceForTheSize={setPriceForTheSize}
+          />
         </Modal>
       </AmountBox>
       <FavoriteBtnWrapper>

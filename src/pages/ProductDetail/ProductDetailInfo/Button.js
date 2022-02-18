@@ -13,9 +13,9 @@ const StyledButton = styled.button`
   color: white;
   padding: 20px;
 
-  ${({ theme, cell }) => css`
+  ${({ theme, sell }) => css`
     border-radius: ${theme.btnRadius.btnRadius2};
-    background-color: ${cell ? theme.palette.green : theme.palette.red};
+    background-color: ${sell ? theme.palette.green : theme.palette.red};
   `}
 `;
 

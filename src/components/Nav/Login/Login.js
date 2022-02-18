@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { flexAlignCenter } from '../../../styles/mixin';
 
-const Login = ({ modalState, closeModal }) => {
+const Login = ({ loginModalState, closeLoginModal }) => {
   const KAKAO_OAUTH_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.REACT_APP_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}&response_type=code`;
 
   const [userData, setUserData] = useState({
@@ -17,51 +17,59 @@ const Login = ({ modalState, closeModal }) => {
 
   const disabled = !(userData.id.length * userData.pw.length > 1);
 
-  if (!modalState) return null;
-
-  return (
-    <>
-      <Overlay onClick={closeModal} />
-      <LoginArea disabled={disabled}>
-        <LoginTop>
-          <span />
-          <button onClick={closeModal}>X</button>
-        </LoginTop>
-        <LogoArea>
-          <LogoCharacter src="/images/logo_character.jpg" />
-          <Logo alt="logo" src="/images/logo.png" />
-          <p>Paint Everything Around Me</p>
-        </LogoArea>
-        <KakaoArea>
-          <KakaoOauthBtn href={KAKAO_OAUTH_URL}>
-            <img
-              alt="loginButton"
-              src="/images/Login/kakao_login_large_wide.png"
-            />
-          </KakaoOauthBtn>
-          <LoginTypeTwo>
-            <Direction>계정정보 직접 입력하여 로그인하기</Direction>
-            <Input
-              type="text"
-              placeholder="카카오메일 아이디, 이메일, 전화번호"
-              name="id"
-              value={userData.id}
-              onChange={handleInput}
-            />
-            <Input
-              type="password"
-              placeholder="비밀번호"
-              name="pw"
-              value={userData.pw}
-              onChange={handleInput}
-            />
-            <Button disabled={disabled}>로그인</Button>
-          </LoginTypeTwo>
-        </KakaoArea>
-        <LoginCaution>로그인 완료시 상세정보 확인 가능</LoginCaution>
-      </LoginArea>
-    </>
-  );
+  if (!loginModalState) return null;
+  else {
+    return (
+      <>
+        <Overlay onClick={closeLoginModal} />
+        <LoginArea
+          disabled={disabled}
+          onKeyUp={e => {
+            if (e.key === 'Escape') {
+              return closeLoginModal;
+            }
+          }}
+        >
+          <LoginTop>
+            <span />
+            <button onClick={closeLoginModal}>X</button>
+          </LoginTop>
+          <LogoArea>
+            <LogoCharacter src="/images/logo_character.jpg" />
+            <Logo alt="logo" src="/images/logo.png" />
+            <p>Paint Everything Around Me</p>
+          </LogoArea>
+          <KakaoArea>
+            <KakaoOauthBtn href={KAKAO_OAUTH_URL}>
+              <img
+                alt="loginButton"
+                src="/images/Login/kakao_login_large_wide.png"
+              />
+            </KakaoOauthBtn>
+            <LoginTypeTwo>
+              <Direction>계정정보 직접 입력하여 로그인하기</Direction>
+              <Input
+                type="text"
+                placeholder="카카오메일 아이디, 이메일, 전화번호"
+                name="id"
+                value={userData.id}
+                onChange={handleInput}
+              />
+              <Input
+                type="password"
+                placeholder="비밀번호"
+                name="pw"
+                value={userData.pw}
+                onChange={handleInput}
+              />
+              <Button disabled={disabled}>로그인</Button>
+            </LoginTypeTwo>
+          </KakaoArea>
+          <LoginCaution>로그인 완료시 상세정보 확인 가능</LoginCaution>
+        </LoginArea>
+      </>
+    );
+  }
 };
 
 const Overlay = styled.div`

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ProductDetailInfo from './ProductDetailInfo/ProductDetailInfo';
 import ProductDetailSlider from './ProductDetailSlider';
+import SearchBar from './DetailSearch/SearchBar';
 
 const ProductDetail = () => {
   const [productBox, setProductBox] = useState([]);

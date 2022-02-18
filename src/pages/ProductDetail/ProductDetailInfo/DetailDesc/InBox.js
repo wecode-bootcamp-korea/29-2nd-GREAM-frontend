@@ -6,19 +6,19 @@ const InBox = ({ productBox }) => {
     <StyledWrapBox>
       <StyledOutBox>
         <NumComment>모델번호</NumComment>
-        <Num bold>{productBox[0]?.model_number}</Num>
+        <Num bold>{productBox?.model_number}</Num>
       </StyledOutBox>
       <StyledOutBox>
         <NumComment>출시일</NumComment>
-        <Num>{productBox[0]?.release_date}</Num>
+        <Num>{productBox?.release_date}</Num>
       </StyledOutBox>
       <StyledOutBox>
-        <NumComment>재료</NumComment>
-        <Num>{productBox[0]?.material}</Num>
+        <NumComment>테마</NumComment>
+        <Num>{productBox?.theme}</Num>
       </StyledOutBox>
       <StyledOutBox>
         <NumComment primary>발매가</NumComment>
-        <Num primary>{productBox[0]?.release_price.toLocaleString()}원</Num>
+        <Num primary>{productBox?.release_price}원</Num>
       </StyledOutBox>
     </StyledWrapBox>
   );

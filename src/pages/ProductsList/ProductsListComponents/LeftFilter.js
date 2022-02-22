@@ -1,31 +1,72 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import FILTER_LIST from './FILTER_LIST';
 import Author from './Author';
+import AuthorDrop from './AuthorDrop';
+import Size from './Size';
+import ThemDrop from './ThemDrop';
+import Theme from './Theme';
+import SizeDrop from './SizeDrop';
+import Exhibit from './Exhibit';
+import ExhibitDrop from './ExhibitDrop ';
+import Price from './Price';
+import PriceDrop from './PriceDrop';
 
 const LeftFilter = () => {
-  const [infoFilter, setInfoFilter] = useState(false);
+  const [hiFilter, setHiFilter] = useState(false);
+  const [theme, setTheme] = useState(false);
+  const [size, setSize] = useState(false);
+  const [exhibit, setExhibit] = useState(false);
+  const [price, setPrice] = useState(false);
 
-  const toggleMenu = () => {
-    setInfoFilter(!infoFilter);
+  const AuthorToggle = () => {
+    setHiFilter(!hiFilter);
+  };
+
+  const themeToggle = () => {
+    setTheme(!theme);
+  };
+
+  const sizeToggle = e => {
+    setSize(!size);
+    e.stopPropagation();
+  };
+
+  const exhibitToggle = () => {
+    setExhibit(!exhibit);
+  };
+
+  const priceToggle = () => {
+    setPrice(!price);
   };
   return (
     <Left>
       <Filter>
         <SpanFilter>필터</SpanFilter>
       </Filter>
-      {FILTER_LIST.map(list => {
-        return (
-          <FilterTitle key={list.id} onClick={toggleMenu}>
-            {infoFilter ? <Author /> : null}
-            <FilterName>
-              <Cate>{list.desc}</Cate>
-              <SubCate>{list.subDesc}</SubCate>
-            </FilterName>
-            <div>➕</div>
-          </FilterTitle>
-        );
-      })}
+      <>
+        <FilterTitle onClick={AuthorToggle}>
+          <Author />
+        </FilterTitle>
+        {hiFilter ? <AuthorDrop /> : null}
+
+        <FilterTitle onClick={themeToggle}>
+          <Theme />
+        </FilterTitle>
+        {theme ? <ThemDrop /> : null}
+
+        <FilterTitle onClick={sizeToggle}>
+          <Size />
+        </FilterTitle>
+        {size ? <SizeDrop /> : null}
+
+        <FilterTitle onClick={exhibitToggle}>
+          {exhibit ? <ExhibitDrop /> : <Exhibit />}
+        </FilterTitle>
+
+        <FilterTitle onClick={priceToggle}>
+          {price ? <PriceDrop /> : <Price />}
+        </FilterTitle>
+      </>
     </Left>
   );
 };
@@ -48,18 +89,7 @@ const FilterTitle = styled.div`
   padding: 20px 0;
   justify-content: space-between;
   border-bottom: 1px solid gray;
+  /* background: teal; */
 `;
 
-const FilterName = styled.div`
-  display: block;
-`;
-
-const Cate = styled.span`
-  display: block;
-  margin-bottom: 15px;
-`;
-
-const SubCate = styled.span`
-  color: ${props => props.theme.greyColor};
-`;
 export default LeftFilter;

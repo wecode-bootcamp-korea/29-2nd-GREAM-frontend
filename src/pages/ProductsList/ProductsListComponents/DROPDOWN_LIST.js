@@ -1,4 +1,4 @@
-const FILTER_LIST = [
+const DROPDOWN_LIST = [
   {
     id: 1,
     desc: '작가',
@@ -26,4 +26,4 @@ const FILTER_LIST = [
   },
 ];
 
-export default FILTER_LIST;
+export default DROPDOWN_LIST;

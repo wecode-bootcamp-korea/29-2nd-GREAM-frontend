@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBookmark, faLight } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
 
 const Card = ({ product_image, author, name, price }) => {
@@ -20,7 +21,7 @@ const Card = ({ product_image, author, name, price }) => {
           <ImmediateSale>즉시구매가</ImmediateSale>
         </Price>
         <LikeCount>
-          <FontAwesomeIcon icon="fa-light fa-bookmark" />
+          <FontAwesomeIcon icon={faBookmark} />
           <Count>4.5만</Count>
           <span>⏍</span>
           <Count>4.5만</Count>
@@ -68,7 +69,7 @@ const ImmediateSale = styled.div`
 `;
 
 const LikeCount = styled.div`
-  margin: 10px 0 0 5px;
+  margin: 10px 0 10px 10px;
 `;
 
 const Count = styled.span`

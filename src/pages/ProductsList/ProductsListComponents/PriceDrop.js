@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-const Author = () => {
+const PriceDrop = () => {
   return (
     <>
       <FilterName>
-        <Cate>작가</Cate>
-        <SubCate>모든 작가</SubCate>
+        <Cate>가격</Cate>
+        <SubCate />
       </FilterName>
-      <div>➕</div>
+      <div>➖</div>
     </>
   );
 };
@@ -22,7 +22,7 @@ const Cate = styled.span`
 `;
 
 const SubCate = styled.span`
-  color: ${props => props.theme.palette.grey};
+  color: ${props => props.theme.greyColor};
   .check {
     display: flex;
   }
@@ -30,4 +30,4 @@ const SubCate = styled.span`
     margin-left: 10px;
   }
 `;
-export default Author;
+export default PriceDrop;

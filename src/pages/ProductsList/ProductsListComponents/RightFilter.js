@@ -5,9 +5,9 @@ const RightFilter = () => {
   const [list, setList] = useState([]);
 
   useEffect(() => {
-    fetch('http://13.124.115:8080/products')
+    fetch('http://13.124.44.115:8080/products')
       .then(res => res.json())
-      .then(result => setList(result));
+      .then(result => setList(result.product_list));
   }, []);
 
   return (

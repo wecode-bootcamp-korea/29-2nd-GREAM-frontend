@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-const Author = () => {
+
+const Size = () => {
   return (
     <>
       <FilterName>
-        <Cate>작가</Cate>
-        <SubCate>모든 작가</SubCate>
+        <Cate>사이즈</Cate>
+        <SubCate>모든 사이즈</SubCate>
       </FilterName>
       <div>➕</div>
     </>
@@ -30,4 +31,4 @@ const SubCate = styled.span`
     margin-left: 10px;
   }
 `;
-export default Author;
+export default Size;

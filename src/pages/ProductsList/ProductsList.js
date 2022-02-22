@@ -3,9 +3,6 @@ import styled from 'styled-components';
 import Box from './ProductsListComponents/Box';
 import Listwrap from './ProductsListComponents/Listwrap';
 import Sliders from './ProductsListComponents/Sliders';
-import ModalCategory from './ProductsListComponents/Author';
-import author from './ProductsListComponents/Author';
-import Author from './ProductsListComponents/Author';
 
 const ProductsList = () => {
   return (
@@ -13,7 +10,6 @@ const ProductsList = () => {
       <Box />
       <Sliders />
       <Listwrap />
-      <Author />
     </Wapping>
   );
 };

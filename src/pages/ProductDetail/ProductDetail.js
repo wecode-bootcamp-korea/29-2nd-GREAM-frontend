@@ -4,15 +4,15 @@ import styled from 'styled-components';
 import Btn from './Btn';
 import FavoriteModal from './FavoriteModal';
 import MarketPriceModal from './MarketPriceModal';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBookmark as farBookmark } from '@fortawesome/free-regular-svg-icons';
-import { faBookmark as fasBookmark } from '@fortawesome/free-solid-svg-icons';
 import { useParams } from 'react-router-dom';
 import BASE_URL from '../config';
 import SIZE_INFO from './sizeInfo';
+import BuyInfo from './BuyInfo';
+import ProductDetailInfo from '../ProductDetail/ProductDetailInfo/ProductDetailInfo';
 
 const ProductDetail = () => {
   const [productData, setProductData] = useState(null);
+  const [productBox, setProductBox] = useState([]);
   const [isToggle, setIsToggle] = useState({
     favoriteModalBtn: false,
     marketPriceBtn: false,
@@ -71,7 +71,7 @@ const ProductDetail = () => {
     fetch(`${BASE_URL}products/${id}`)
       .then(res => res.json())
       .then(data => {
-        setProductBox(data);
+        setProductData(data);
       });
   };
 
@@ -82,58 +82,6 @@ const ProductDetail = () => {
         setProductData(data);
       });
   }, [id]);
-
-  const btnClick = e => {
-    e.preventDefault();
-    const selectedBtn = e.currentTarget.getAttribute('name');
-    const selectedSize = e.currentTarget.getAttribute('value');
-
-    setIsClickBtn(prev => {
-      return {
-        ...prev,
-        [selectedBtn]: !prev[selectedBtn],
-      };
-    });
-
-    fetch(`${BASE_URL}products/follow`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: sessionStorage.getItem('token'),
-      },
-      body: JSON.stringify({
-        user_id: 2,
-        product_id: Number(productId),
-        size_id: Number(selectedSize),
-      }),
-    }).then(res => res.json());
-  };
-
-  const ModalListObj = {
-    favoriteModal: (
-      <FavoriteModal
-        title="관심 상품 추가"
-        confirmText="확인"
-        productName={productName}
-        productImg={productImg}
-        productSizes={SIZE_INFO}
-        productId={productId}
-        onConfirm={onModalConfirm}
-        btnClick={btnClick}
-        isClickBtn={isClickBtn}
-      />
-    ),
-    marketPriceModal: (
-      <MarketPriceModal
-        title="시세"
-        productName={productName}
-        productImg={productImg}
-        productSizes={SIZE_INFO}
-        productId={productId}
-        onConfirm={onModalConfirm}
-      />
-    ),
-  };
 
   const btnClick = e => {
     e.preventDefault();

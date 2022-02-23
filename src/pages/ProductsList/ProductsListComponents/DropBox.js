@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Btn from '../../ProductDetail/Btn';
 
@@ -18,7 +18,8 @@ const DropBox = ({ filterData, setFilter }) => {
           type="button"
           onClick={dropDownButton}
         >
-          {filterData.filterType[1] + (dropDown ? '-' : '+')}
+          {filterData.filterType[1]}
+          <span>{dropDown ? '-' : '+'}</span>
         </ClickTitleBtn>
       </TitleWrapper>
 
@@ -29,6 +30,7 @@ const DropBox = ({ filterData, setFilter }) => {
               <ListLabel>
                 <ListCheckBox
                   type="checkbox"
+                  id={filterData.idNameList[0].key}
                   name={Object.keys(idNameList)}
                   onChange={e => setFilter(e, filterData.filterType[0])}
                 />
@@ -50,24 +52,33 @@ const DropBoxWrapper = styled.div`
   width: 100%;
   color: ${({ theme }) => theme.palette.black};
   font-size: ${({ theme }) => theme.fontsize.fontSize1};
+  padding-top: 18px;
 `;
 
 const TitleWrapper = styled.div`
-  background-color: red;
+  width: 100%;
 `;
 const ClickTitleBtn = styled(Btn)`
+  width: 100%;
+  justify-content: space-between;
   padding: 0;
   height: 10px;
-  font-size: ${({ theme }) => theme.fontsize.fontSize1};
+  font-size: ${({ theme }) => theme.fontsize.fontSize0};
   border: 0;
+  font-weight: 500;
+  span {
+    font-size: 16px;
+  }
 `;
 
 const DownList = styled.div`
-  padding: 4px 0;
+  padding: 0;
+  padding-top: 22px;
 `;
 
 const ListCheckBox = styled.input`
   border: 0;
+  color: ${props => (props.isTrusted ? 'red' : 'green')};
 `;
 
 const ListLabel = styled.label`
@@ -80,4 +91,8 @@ const ListLabel = styled.label`
 const BasicType = styled.div`
   color: ${({ theme }) => theme.palette.grey};
   margin-top: 4px;
+  font-size: 15px;
+  padding-top: 11px;
+  padding-bottom: 11px;
+  border-bottom: 1px solid ${({ theme }) => theme.palette.lightGrey};
 `;

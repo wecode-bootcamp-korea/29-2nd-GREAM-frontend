@@ -66,7 +66,7 @@ const NameBox = styled.div`
 const Picture = styled.img`
   width: 100%;
   padding: 7px;
-  border-radius: 10px;
+  border-radius: 20px;
   object-fit: cover;
 `;
 

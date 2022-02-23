@@ -13,7 +13,7 @@ const Listwrap = () => {
 };
 
 const ListContainer = styled.div`
-  margin: 0 40px 80px;
   display: flex;
 `;
+
 export default Listwrap;

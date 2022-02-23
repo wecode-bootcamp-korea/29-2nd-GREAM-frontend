@@ -23,6 +23,10 @@ const SLIDER_DATAS = [
     id: 6,
     img: '/images/jihong/jaehyung.jpg',
   },
+  {
+    id: 7,
+    img: '/images/jihong/wecode.jpg',
+  },
 ];
 
 export default SLIDER_DATAS;

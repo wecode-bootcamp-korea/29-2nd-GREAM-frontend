@@ -18,7 +18,7 @@ const BOX = styled.div`
   margin: 15px;
 `;
 const Button = styled.button`
-  background-color: ${props => props.theme.greyColor}
+  background-color: ${props => props.theme.greyColor};
   margin-top: 15px;
   padding: 8px;
   margin-left: 8px;

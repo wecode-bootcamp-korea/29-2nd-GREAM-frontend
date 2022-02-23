@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -20,6 +21,12 @@ function Sliders() {
     },
   };
 
+  const navigate = useNavigate();
+
+  const goHome = () => {
+    navigate('/list');
+  };
+
   return (
     <StyledSlider {...settings}>
       {SLIDER_DATAS.map(data => {
@@ -30,7 +37,7 @@ function Sliders() {
                 <div className="slideCondition">
                   {currentSlide}/{SLIDER_DATAS.length}
                 </div>
-                <Image src={data.img} />
+                <Image src={data.img} onClick={goHome} />
               </Wrap>
             </Item>
           </div>
@@ -67,7 +74,6 @@ const StyledSlider = styled(Slider)`
     font-size: 18px;
     font-weight: 600;
     z-index: 1;
-    width: 100px;
     color: ${props => props.theme.palette.darkGrey};
   }
 

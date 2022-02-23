@@ -1,16 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ChartBtn = () => {
+const ChartBtn = ({ onClickBtn }) => {
   return (
     <ChartContainer>
-      <Btn>
+      <Btn onClick={() => onClickBtn('first')}>
         <span>1주</span>
       </Btn>
-      <Btn>
+      <Btn onClick={() => onClickBtn('second')}>
         <span>2주</span>
       </Btn>
-      <Btn>
+      <Btn onClick={() => onClickBtn('third')}>
         <span>전체</span>
       </Btn>
     </ChartContainer>

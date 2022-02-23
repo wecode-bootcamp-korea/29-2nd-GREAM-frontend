@@ -11,17 +11,17 @@ import {
 } from 'recharts';
 import styled from 'styled-components';
 
-const Chart = ({ chartData }) => {
-  const changePriceString = price => {
-    const convertPrice = Math.floor(parseInt(price) / 1000) * 1000;
-    return convertPrice;
-  };
-  const data = Object.entries(chartData);
+const Chart = ({ data, changePriceString, convertData }) => {
+  // const changePriceString = price => {
+  //   const convertPrice = Math.floor(parseInt(price) / 1000) * 1000;
+  //   return convertPrice;
+  // };
+  // const data = Object.entries(chartData);
 
-  const convertData = data.map(x => ({
-    date: x[0],
-    price: changePriceString(x[1].quote),
-  }));
+  // const convertData = data.map(x => ({
+  //   date: x[0],
+  //   price: changePriceString(x[1].quote),
+  // }));
 
   const tooltipStyle = {
     backgroundColor: 'black',
@@ -56,6 +56,34 @@ const Chart = ({ chartData }) => {
   );
 };
 
-const Charts = styled.div``;
+const Charts = styled(ResponsiveContainer)`
+  width: 100%;
+  margin-left: 10px;
+  margin-top: 30px;
 
-export default Charts;
+  .recharts-layer.recharts-cartesian-axis.recharts-xAxis.xAxis {
+    display: none;
+  }
+
+  .recharts-layer.recharts-cartesian-axis.recharts-yAxis.yAxis {
+    font-size: 13px;
+  }
+
+  .recharts-default-tooltip {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .recharts-tooltip-label {
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .recharts-tooltip-item-list {
+      font-size: 13px;
+    }
+  }
+`;
+
+export default Chart;

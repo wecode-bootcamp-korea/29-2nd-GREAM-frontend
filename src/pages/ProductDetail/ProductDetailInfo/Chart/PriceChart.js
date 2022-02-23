@@ -1,22 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import Chart from './Chart';
+import styled from 'styled-components';
 
-const PriceChart = () => {
-  const [chartData, setChartData] = useState([]);
-
-  useEffect(() => {
-    fetch(`http://15.164.48.155:8000/products/1/quote`)
-      .then(res => res.json())
-      .then(data => {
-        setChartData(data?.quote);
-      });
-  }, []);
-
+const PriceChart = ({ data, changePriceString, convertData }) => {
   return (
-    <div>
-      <Chart chartData={chartData} />
-    </div>
+    <OutBox>
+      <Box>
+        <Chart
+          data={data}
+          changePriceString={changePriceString}
+          convertData={convertData.slice(0, 7)}
+        />
+      </Box>
+      <Box none>
+        <Chart
+          data={data}
+          changePriceString={changePriceString}
+          convertData={convertData.slice(8, 15)}
+        />
+      </Box>
+      <Box none>
+        <Chart
+          data={data}
+          changePriceString={changePriceString}
+          convertData={convertData.slice(16, 23)}
+        />
+      </Box>
+    </OutBox>
   );
 };
+
+const OutBox = styled.div``;
+const Box = styled.div`
+  display: ${({ none }) => (none ? 'none' : 'block')};
+`;
 
 export default PriceChart;

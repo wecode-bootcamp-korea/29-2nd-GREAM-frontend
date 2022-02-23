@@ -5,7 +5,7 @@ import ScrollToTop from './components/ScrollToTop./ScrollToTop';
 import ProductDetail from './pages/ProductDetail/ProductDetail';
 import ProductsList from './pages/ProductsList/ProductsList';
 import OAuthHandler from './components/Nav/Login/OauthHandler';
-import ChartBox from './pages/ProductDetail/ProductDetailInfo/ChartBox';
+import ChartBox from './pages/ProductDetail/ProductDetailInfo/Chart/ChartBox';
 
 const Router = () => {
   return (

@@ -6,6 +6,7 @@ import ProductDetail from './pages/ProductDetail/ProductDetail';
 import ProductsList from './pages/ProductsList/ProductsList';
 import OAuthHandler from './components/Nav/Login/OauthHandler';
 import ChartBox from './pages/ProductDetail/PriceChart/ChartBox';
+import Logout from './components/Nav/Login/Logout';
 
 const Router = () => {
   return (
@@ -17,6 +18,7 @@ const Router = () => {
         <Route path="/list" element={<ProductsList />} />
         <Route path="/oauth" element={<OAuthHandler />} />
         <Route path="/chart" element={<ChartBox />} />
+        <Route path="/logout" element={<Logout />} />
       </Routes>
     </BrowserRouter>
   );

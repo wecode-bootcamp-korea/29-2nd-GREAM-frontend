@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
@@ -10,9 +10,25 @@ import SearchBar from './SearchBar/SearchBar';
 const Nav = () => {
   const [loginModalState, setLoginModalState] = useState(false);
   const [searchBarState, setSearchBarState] = useState(false);
+  const [needLogin, setNeedLogin] = useState(true);
   const closeLoginModal = () => setLoginModalState(false);
   const closeSearchBar = () => setSearchBarState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (window.sessionStorage.getItem('JWT')) {
+      setNeedLogin(false);
+    } else {
+      setNeedLogin(true);
+    }
+  }, [location]);
+
+  const logout = () => {
+    window.sessionStorage.removeItem('JWT');
+    navigate('/logout');
+    setNeedLogin(true);
+  };
 
   return (
     <>
@@ -28,7 +44,14 @@ const Nav = () => {
           onClick={() => navigate('/list')}
         />
         <RightSide>
-          <RightBtn onClick={() => setLoginModalState(true)}> LOGIN </RightBtn>
+          {needLogin ? (
+            <RightBtn onClick={() => setLoginModalState(true)}>
+              {' '}
+              LOGIN{' '}
+            </RightBtn>
+          ) : (
+            <RightBtn onClick={() => logout()}> LOGOUT </RightBtn>
+          )}
           <span>|</span>
           <RightBtn>
             <span onClick={() => setSearchBarState(true)}> SEARCH</span>

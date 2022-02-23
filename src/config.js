@@ -1,1 +1,1 @@
-export const LOGIN_API_URL = 'http://13.124.44.115:8080';
+export const BASE_URL = 'http://15.164.48.155:8000';

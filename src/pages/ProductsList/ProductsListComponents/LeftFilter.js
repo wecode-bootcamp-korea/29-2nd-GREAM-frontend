@@ -25,11 +25,13 @@ const Left = styled.div`
 `;
 
 const Filter = styled.div`
-  padding: 23px 0 15px;
+  padding: 32px 0 15px;
+  width: 100%;
 `;
 
 const SpanFilter = styled.span`
   font-weight: bold;
+  font-size: 14px;
 `;
 
 export default LeftFilter;

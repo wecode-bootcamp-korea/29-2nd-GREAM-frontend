@@ -57,33 +57,33 @@ const StyledSlider = styled(Slider)`
 
   .slick-next {
     top: 85%;
-    right: 6%;
+    right: 1%;
     z-index: 1;
   }
 
   .slick-prev {
     top: 85%;
-    left: 89%;
+    left: 94%;
     z-index: 1;
   }
 
   .slideCondition {
     position: absolute;
     top: 80%;
-    left: 90.5%;
+    left: 95.5%;
     font-size: 18px;
     font-weight: 600;
-    z-index: 1;
-    color: ${props => props.theme.palette.darkGrey};
+    z-index: 2;
+    color: ${props => props.theme.palette.grey};
   }
 
   .slick-next:before {
-    color: ${props => props.theme.palette.darkGrey};
+    color: ${props => props.theme.palette.grey};
     font-size: ${({ theme }) => theme.fontsize.fontSize1};
   }
 
   .slick-prev:before {
-    color: ${props => props.theme.palette.darkGrey};
+    color: ${props => props.theme.palette.grey};
     font-size: ${({ theme }) => theme.fontsize.fontSize1};
   }
 `;

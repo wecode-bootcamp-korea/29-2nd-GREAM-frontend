@@ -39,6 +39,7 @@ function Sliders() {
     </StyledSlider>
   );
 }
+export default Sliders;
 
 const StyledSlider = styled(Slider)`
   position: relative;
@@ -49,26 +50,37 @@ const StyledSlider = styled(Slider)`
 
   .slick-next {
     top: 85%;
-    right: 5%;
+    right: 6%;
     z-index: 1;
   }
 
   .slick-prev {
     top: 85%;
-    left: 85%;
+    left: 89%;
     z-index: 1;
   }
 
   .slideCondition {
     position: absolute;
     top: 80%;
-    left: 89%;
+    left: 90.5%;
     font-size: 18px;
+    font-weight: 600;
     z-index: 1;
-    color: ${props => props.theme.palette.lightGrey};
+    width: 100px;
+    color: ${props => props.theme.palette.darkGrey};
+  }
+
+  .slick-next:before {
+    color: ${props => props.theme.palette.darkGrey};
+    font-size: ${({ theme }) => theme.fontsize.fontSize1};
+  }
+
+  .slick-prev:before {
+    color: ${props => props.theme.palette.darkGrey};
+    font-size: ${({ theme }) => theme.fontsize.fontSize1};
   }
 `;
-
 const Item = styled.div`
   display: flex;
   width: 100%;
@@ -78,12 +90,9 @@ const Item = styled.div`
 
 const Wrap = styled.span`
   display: flex;
-  }
 `;
 
 const Image = styled.img`
   position: relative;
   width: 100%;
 `;
-
-export default Sliders;

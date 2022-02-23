@@ -15,7 +15,10 @@ const ProductsList = () => {
 };
 
 const Wapping = styled.div`
-  margin: 10px 40px;
+  width: 1300px;
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
   font-family: ${props => props.Global};
 `;
 export default ProductsList;

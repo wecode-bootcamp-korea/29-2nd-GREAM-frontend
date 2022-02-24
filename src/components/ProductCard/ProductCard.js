@@ -14,7 +14,7 @@ const Card = ({ product_image, author, name, price, id, wishlist_count }) => {
 
   return (
     <ProductCard>
-      <ProductLink to={`/detail/${id}`}>
+      <ProductLink to={`/product/${id}`}>
         <Picture src={product_image} alt="제품이미지" />
         <Product>
           <AuthorNameBox>

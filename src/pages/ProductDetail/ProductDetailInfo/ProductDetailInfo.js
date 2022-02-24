@@ -162,11 +162,11 @@ const ProductDetailInfo = ({
         >
           {isCheckedBookMark !== -1 ? (
             <span>
-              <FontAwesomeIcon icon={fasBookmark} size="1x" />
+              <FontAwesomeIcon icon={farBookmark} size="1x" />
             </span>
           ) : (
             <span>
-              <FontAwesomeIcon icon={farBookmark} size="1x" />
+              <FontAwesomeIcon icon={fasBookmark} size="1x" />
             </span>
           )}
           <span>관심상품</span>

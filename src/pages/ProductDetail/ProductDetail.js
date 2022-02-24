@@ -49,8 +49,8 @@ const ProductDetail = () => {
   const productAuthor = productData?.author;
   const productInterestedNum = productData?.wishlist.length;
   const isModalOpen = isToggle.marketPriceBtn === true;
-  localStorage.setItem(productId, JSON.stringify(isClickBtn));
-  const savedBookMark = JSON.parse(localStorage.getItem(productId));
+  sessionStorage.setItem(productId, JSON.stringify(isClickBtn));
+  const savedBookMark = JSON.parse(sessionStorage.getItem(productId));
   const isCheckedBookMark = Object.values(savedBookMark).indexOf(true);
 
   const renderInterestedNum = productInterestedNum => {
@@ -72,7 +72,7 @@ const ProductDetail = () => {
   const renderNumber = renderInterestedNum(productInterestedNum);
 
   const clickToggle = e => {
-    if (sessionStorage.getItem('token')) {
+    if (sessionStorage.getItem('JWT')) {
       const selectedModalBtn = e.currentTarget.getAttribute('name');
       setIsToggle(prev => {
         return {
@@ -127,8 +127,7 @@ const ProductDetail = () => {
     fetch(`${BASE_URL}products/follow`, {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: sessionStorage.getItem('token'),
+        Authorization: sessionStorage.getItem('JWT'),
       },
       body: JSON.stringify({
         user_id: 501,

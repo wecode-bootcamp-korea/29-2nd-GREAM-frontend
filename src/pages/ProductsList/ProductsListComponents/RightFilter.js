@@ -1,9 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Card from '../../../components/ProductCard/ProductCard';
 import Btn from '../../ProductDetail/Btn';
+import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const RightFilter = ({ list, sortLists, setFilter }) => {
+  const [changeBtn, setChangeCriteriaBtn] = useState({
+    '-realse-price': '-realease_price',
+    release_price: 'realase',
+  });
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const changeSortBtn = e => {
+    setChangeCriteriaBtn(prev => {
+      return {
+        ...prev,
+        [e.target.name]: !prev[e.target.name],
+      };
+    });
+  };
+
+  const addSortQuery = e => {
+    const sortQuery = e.target.name;
+    const sortQueryString = `?sort=${sortQuery}`;
+    const sortQueryString2 = `&sort=${sortQuery}`;
+
+    if (location.search.length === 0) {
+      navigate((location.search += sortQueryString));
+    } else {
+      navigate((location.search += sortQueryString2));
+    }
+  };
+
   return (
     <Right>
       <Sorting>
@@ -17,7 +48,7 @@ const RightFilter = ({ list, sortLists, setFilter }) => {
               onClick={e => setFilter(e, x.sortType)}
               outline
             >
-              {Object.values(x.sortList)}
+              {Object.values(x.sortList).join()}
             </SortBtn>
           );
         })}

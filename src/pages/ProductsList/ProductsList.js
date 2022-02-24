@@ -6,7 +6,7 @@ import Listwrap from './ProductsListComponents/Listwrap';
 import Sliders from './ProductsListComponents/Sliders';
 import FILTER_LISTS from './ProductsListComponents/DROPDOWN_LIST';
 import SORT_LISTS from './ProductsListComponents/SORT_LIST';
-import { LOGIN_API_URL } from '../../config';
+import { BASE_URL } from '../../config';
 
 const ProductsList = () => {
   const [list, setList] = useState([]);
@@ -41,6 +41,7 @@ const ProductsList = () => {
 
   const makeFilterQuery = productFilters => {
     let query = '';
+
     for (let filterType in productFilters) {
       const filterIds = productFilters[filterType];
       if (filterIds.length > 0) {
@@ -52,7 +53,7 @@ const ProductsList = () => {
   };
 
   useEffect(() => {
-    fetch(`${LOGIN_API_URL}/products${location.search}`)
+    fetch(`${BASE_URL}/products${location.search}`)
       .then(res => res.json())
       .then(result => {
         setList(result.product_list);

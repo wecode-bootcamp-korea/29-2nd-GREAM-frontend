@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -20,6 +21,12 @@ function Sliders() {
     },
   };
 
+  const navigate = useNavigate();
+
+  const goHome = () => {
+    navigate('/list');
+  };
+
   return (
     <StyledSlider {...settings}>
       {SLIDER_DATAS.map(data => {
@@ -30,7 +37,7 @@ function Sliders() {
                 <div className="slideCondition">
                   {currentSlide}/{SLIDER_DATAS.length}
                 </div>
-                <Image src={data.img} />
+                <Image src={data.img} onClick={goHome} />
               </Wrap>
             </Item>
           </div>
@@ -39,6 +46,7 @@ function Sliders() {
     </StyledSlider>
   );
 }
+export default Sliders;
 
 const StyledSlider = styled(Slider)`
   position: relative;
@@ -49,26 +57,36 @@ const StyledSlider = styled(Slider)`
 
   .slick-next {
     top: 85%;
-    right: 5%;
+    right: 1%;
     z-index: 1;
   }
 
   .slick-prev {
     top: 85%;
-    left: 85%;
+    left: 94%;
     z-index: 1;
   }
 
   .slideCondition {
     position: absolute;
     top: 80%;
-    left: 89%;
+    left: 95.5%;
     font-size: 18px;
-    z-index: 1;
-    color: ${props => props.theme.palette.lightGrey};
+    font-weight: 600;
+    z-index: 2;
+    color: ${props => props.theme.palette.grey};
+  }
+
+  .slick-next:before {
+    color: ${props => props.theme.palette.grey};
+    font-size: ${({ theme }) => theme.fontsize.fontSize1};
+  }
+
+  .slick-prev:before {
+    color: ${props => props.theme.palette.grey};
+    font-size: ${({ theme }) => theme.fontsize.fontSize1};
   }
 `;
-
 const Item = styled.div`
   display: flex;
   width: 100%;
@@ -78,12 +96,9 @@ const Item = styled.div`
 
 const Wrap = styled.span`
   display: flex;
-  }
 `;
 
 const Image = styled.img`
   position: relative;
   width: 100%;
 `;
-
-export default Sliders;

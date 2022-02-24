@@ -1,15 +1,31 @@
 const SLIDER_DATAS = [
   {
     id: 1,
-    img: '/images/List/Banner/banner_img1.jpeg',
+    img: '/images/jihong/kyungwon.jpg',
   },
   {
     id: 2,
-    img: '/images/List/Banner/banner_img2.jpeg',
+    img: '/images/jihong/gangil.jpg',
   },
   {
     id: 3,
-    img: '/images/List/Banner/banner_img3.jpeg',
+    img: '/images/jihong/hyelynn.jpg',
+  },
+  {
+    id: 4,
+    img: '/images/jihong/dowoon.jpg',
+  },
+  {
+    id: 5,
+    img: '/images/jihong/jihong.jpg',
+  },
+  {
+    id: 6,
+    img: '/images/jihong/jaehyung.jpg',
+  },
+  {
+    id: 7,
+    img: '/images/jihong/wecode.jpg',
   },
 ];
 

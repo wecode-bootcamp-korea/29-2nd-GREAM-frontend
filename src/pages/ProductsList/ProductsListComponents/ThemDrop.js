@@ -7,23 +7,23 @@ const ThemDrop = () => {
       <Cate />
       <SubCate>
         <div className="check">
-          <input type="radio" name="checkbox" />
+          <input type="checkbox" />
           <p className="category">추상</p>
         </div>
         <div className="check">
-          <input type="radio" name="checkbox" />
+          <input type="checkbox" />
           <p className="category">구상</p>
         </div>
         <div className="check">
-          <input type="radio" name="checkbox" />
+          <input type="checkbox" />
           <p className="category">팝아트</p>
         </div>
         <div className="check">
-          <input type="radio" name="checkbox" />
+          <input type="checkbox" />
           <p className="category">입체주의</p>
         </div>
         <div className="check">
-          <input type="radio" name="checkbox" />
+          <input type="checkbox" />
           <p className="category">동양미술</p>
         </div>
       </SubCate>

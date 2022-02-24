@@ -1,24 +1,30 @@
 import React from 'react';
 import styled from 'styled-components';
 import Card from '../../../components/ProductCard/ProductCard';
-import SORT_LISTBTN from './SORT_LISTBTN';
-import SortBtn from './SortBtn';
+import Btn from '../../ProductDetail/Btn';
 
-const RightFilter = ({ sorted, changeSort }) => {
+const RightFilter = ({ list, sortLists, setFilter }) => {
   return (
     <Right>
       <Sorting>
-        {/* {SORT_LISTBTN.map(({ id, name }) => {
+        {sortLists.map((x, idx) => {
           return (
-            <SortBtn type="button" key={id} name={name} onClick={changeSort}>
-              {name}
+            <SortBtn
+              type="button"
+              color="darkGrey"
+              key={idx}
+              name={Object.keys(x.sortList)}
+              onClick={e => setFilter(e, x.sortType)}
+              outline
+            >
+              {Object.values(x.sortList)}
             </SortBtn>
           );
-        })} */}
+        })}
       </Sorting>
       <Products>
-        {sorted.length > 0 &&
-          sorted.map(({ id, author, name, price, image }) => {
+        {list?.length > 0 &&
+          list.map(({ id, author, name, price, image, wishlist_count }) => {
             return (
               <Card
                 key={id}
@@ -26,6 +32,8 @@ const RightFilter = ({ sorted, changeSort }) => {
                 author={author}
                 name={name}
                 price={price}
+                id={id}
+                wishlist_count={wishlist_count}
               />
             );
           })}
@@ -35,17 +43,34 @@ const RightFilter = ({ sorted, changeSort }) => {
 };
 
 const Right = styled.div`
-  width: 100%;
+  width: 1100px;
+  color: ${({ theme }) => theme.palette.black};
 `;
 
 const Sorting = styled.div`
   height: 68px;
   padding: 23px 0 15px;
-  display: flex;
 `;
+
+const SortBtn = styled(Btn)`
+  padding: 0;
+  font-weight: 500;
+  font-size: ${({ theme }) => theme.fontsize.fontSize0};
+  float: right;
+  margin-left: 30px;
+  color: ${({ theme }) => theme.palette.grey};
+  height: 20px;
+  padding: 3px;
+  border: 0;
+  :hover {
+    color: ${({ theme }) => theme.palette.black};
+  }
+`;
+
 const Products = styled.div`
   display: flex;
+  flex-wrap: wrap;
   width: 100%;
-  object-fit: cover;
 `;
+
 export default RightFilter;

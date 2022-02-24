@@ -7,15 +7,15 @@ const SizeDrop = () => {
       <Cate />
       <SubCate>
         <div className="check">
-          <input type="radio" name="checkbox" />
+          <input type="checkbox" />
           <p className="category">Small</p>
         </div>
         <div className="check">
-          <input type="radio" name="checkbox" />
+          <input type="checkbox" />
           <p className="category">Medium</p>
         </div>
         <div className="check">
-          <input type="radio" name="checkbox" />
+          <input type="checkbox" />
           <p className="category">Large</p>
         </div>
       </SubCate>

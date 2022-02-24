@@ -13,9 +13,8 @@ import { faBookmark as fasBookmark } from '@fortawesome/free-regular-svg-icons';
 import Btn from '../Btn';
 
 const ProductDetailInfo = ({
-  productBox,
+  productData,
   sizeBox,
-  setProductBox,
   clickToggle,
   isCheckedBookMark,
   renderNumber,
@@ -33,6 +32,11 @@ const ProductDetailInfo = ({
 
   const [selectedSize, setSelectedSize] = useState('');
 
+  function numberWithCommas(x) {
+    const a = x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return a;
+  }
+
   const customStyles = {
     content: {
       top: '10%',
@@ -48,8 +52,8 @@ const ProductDetailInfo = ({
 
   return (
     <ProductDetailInfoBox>
-      <Brand>{productBox?.author}</Brand>
-      <Name>{productBox?.name}</Name>
+      <Brand>{productData?.author}</Brand>
+      <Name>{productData?.name}</Name>
       <Size>
         <SizeComment>사이즈</SizeComment>
         <ClickSizeBox onClick={() => setSizeModal(true)}>
@@ -59,17 +63,27 @@ const ProductDetailInfo = ({
       <TransactionAmountBox>
         <TransactionAmountComment>최근 거래가</TransactionAmountComment>
         <TransactionAmount>
-          {pickedSize !== null ? pickedSize : productBox?.recent_price}
+          {pickedSize !== null
+            ? pickedSize
+            : numberWithCommas(Math.floor(productData?.recent_price)) + '원'}
         </TransactionAmount>
       </TransactionAmountBox>
       <AmountBox>
         <Button onClick={() => setPurchaseModal(true)}>
           <span style={margin}>구매</span>
-          <div>{sizeBox?.buyer_size_price?.[0].price}</div>
+          <div>
+            {numberWithCommas(
+              Math.floor(sizeBox?.buyer_size_price?.[0].price)
+            ) + '원'}
+          </div>
         </Button>
         <Button onClick={() => setSellModal(true)} sell>
           <span style={margin}>판매</span>
-          <div>{sizeBox?.seller_size_price?.[0].price}</div>
+          <div>
+            {numberWithCommas(
+              Math.floor(sizeBox?.seller_size_price?.[0].price)
+            ) + '원'}
+          </div>
         </Button>
         <Modal
           isOpen={purchaseModal}
@@ -80,13 +94,14 @@ const ProductDetailInfo = ({
           }}
           style={customStyles}
         >
-          <ModalTop productBox={productBox} />
+          <ModalTop productData={productData} />
           <ModalContents
             sizeBox={sizeBox}
             setSelectedSize={setSelectedSize}
-            setPickedSize={setPickedSize}
+            // setPickedSize={setPickedSize}
             setIsOpen={setIsOpen}
             isOpen={isOpen}
+            numberWithCommas={numberWithCommas}
           />
           {isOpen && (
             <PurchaseBtn sizeBox={sizeBox} selectedSize={selectedSize} />
@@ -103,8 +118,9 @@ const ProductDetailInfo = ({
             setSelectedSize={setSelectedSize}
             setIsOpen={setIsOpen}
             isOpen={isOpen}
-            setPickedSize={setPickedSize}
+            // setPickedSize={setPickedSize}
             sell
+            numberWithCommas={numberWithCommas}
           />
           {isOpen && (
             <PurchaseBtn sizeBox={sizeBox} selectedSize={selectedSize} isSell />
@@ -123,6 +139,7 @@ const ProductDetailInfo = ({
             isOpen={isOpen}
             setPickedSize={setPickedSize}
             setPriceForTheSize={setPriceForTheSize}
+            numberWithCommas={numberWithCommas}
           />
         </Modal>
       </AmountBox>
@@ -147,7 +164,10 @@ const ProductDetailInfo = ({
           <span>{renderNumber}</span>
         </HeightFavoriteBtn>
       </FavoriteBtnWrapper>
-      <DetailDesc productBox={productBox} />
+      <DetailDesc
+        productData={productData}
+        numberWithCommas={numberWithCommas}
+      />
       <DeliveryBox />
     </ProductDetailInfoBox>
   );

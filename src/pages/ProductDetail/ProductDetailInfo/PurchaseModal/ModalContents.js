@@ -8,6 +8,7 @@ const ModalContents = ({
   setPickedSize,
   setPriceForTheSize,
   sell,
+  numberWithCommas,
 }) => {
   const [changedColor, setChangedColor] = useState({
     Small: false,
@@ -39,7 +40,8 @@ const ModalContents = ({
         >
           <Box>
             <Size>{x.size}</Size>
-            <Price>{x.price}</Price>
+            <Price>{numberWithCommas(Math.floor(x.price))}원</Price>
+            {/* {numberWithCommas(Math.floor(x.price))}원 */}
           </Box>
         </SizeBtn>
       ))}
@@ -57,7 +59,7 @@ const ModalContents = ({
         >
           <Box>
             <Size>{x.size}</Size>
-            <Price>{x.price}</Price>
+            <Price>{numberWithCommas(Math.floor(x.price))}원</Price>
           </Box>
         </SizeBtn>
       ))}

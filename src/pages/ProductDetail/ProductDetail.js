@@ -14,7 +14,6 @@ import MarketPrice from './MarketPrice';
 const ProductDetail = () => {
   const [productData, setProductData] = useState(null);
   const [biddingData, setBiddingData] = useState(null);
-  const [productBox, setProductBox] = useState([]);
   const [isToggle, setIsToggle] = useState({
     favoriteModalBtn: false,
     marketPriceBtn: false,
@@ -107,7 +106,7 @@ const ProductDetail = () => {
   const [sizeBox, setSizeBox] = useState([]);
 
   useEffect(() => {
-    fetch(`http://15.164.48.155:8080/products/size-price/1`)
+    fetch(`http://15.164.48.155:8000/products/size-price/1`)
       .then(res => res.json())
       .then(data => {
         setSizeBox(data);
@@ -115,7 +114,7 @@ const ProductDetail = () => {
   }, []);
 
   useEffect(() => {
-    fetch(`http://15.164.48.155:8080/products/${id}`)
+    fetch(`http://15.164.48.155:8000/products/${id}`)
       .then(res => res.json())
       .then(data => {
         setProductData(data);
@@ -216,8 +215,8 @@ const ProductDetail = () => {
         )}
         <InfoWrraper>
           <ProductDetailInfo
-            productBox={productBox}
-            setProductBox={setProductBox}
+            productData={productData}
+            setProductData={setProductData}
             clickToggle={clickToggle}
             isCheckedBookMark={isCheckedBookMark}
             renderNumber={renderNumber}

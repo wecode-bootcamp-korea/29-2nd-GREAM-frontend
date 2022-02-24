@@ -16,17 +16,15 @@ const ProductsList = () => {
     year: [],
     price: [],
     size: [],
-    sort: [],
+    sort: '',
   });
 
   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
-    if (Object.values(productFilters).length > 0) {
-      const filterQuery = makeFilterQuery(productFilters);
-      navigate(`/list${filterQuery}`);
-    }
+    const filterQuery = makeFilterQuery(productFilters);
+    navigate(`/list${filterQuery}`);
   }, [navigate, productFilters]);
 
   const handleProductFilter = (e, filterTypeQuery) => {
@@ -45,11 +43,11 @@ const ProductsList = () => {
     let query = '';
     for (let filterType in productFilters) {
       const filterIds = productFilters[filterType];
-
       if (filterIds.length > 0) {
         query += `&${filterType}=${filterIds.join(`&${filterType}=`)}`;
       }
     }
+
     return query.replace('&', '?');
   };
 
@@ -66,8 +64,8 @@ const ProductsList = () => {
       <Box />
       <Sliders list={list} />
       <Listwrap
-        FILTER_LISTS={FILTER_LISTS}
-        SORT_LISTS={SORT_LISTS}
+        filterLists={FILTER_LISTS}
+        sortLists={SORT_LISTS}
         setFilter={handleProductFilter}
         list={list}
       />

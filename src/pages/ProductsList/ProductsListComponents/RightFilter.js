@@ -3,11 +3,11 @@ import styled from 'styled-components';
 import Card from '../../../components/ProductCard/ProductCard';
 import Btn from '../../ProductDetail/Btn';
 
-const RightFilter = ({ list, SORT_LISTS, setFilter }) => {
+const RightFilter = ({ list, sortLists, setFilter }) => {
   return (
     <Right>
       <Sorting>
-        {SORT_LISTS.map((x, idx) => {
+        {sortLists.map((x, idx) => {
           return (
             <SortBtn
               type="button"

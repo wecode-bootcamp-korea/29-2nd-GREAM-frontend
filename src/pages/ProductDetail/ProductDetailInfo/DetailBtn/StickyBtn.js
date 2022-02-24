@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Button from '../Button';
 
-const SearchBar = () => {
-  const [isMainScroll, setIsMainScroll] = useState(true);
+const SearchBar = ({ productData, sizeBox }) => {
+  const [isMainScroll, setIsMainScroll] = useState(false);
 
   const listenScrollEvent = () => {
-    window.scrollY > 200 ? setIsMainScroll(true) : setIsMainScroll(false);
+    window.scrollY > 300 ? setIsMainScroll(true) : setIsMainScroll(false);
   };
 
   useEffect(() => {
@@ -27,26 +27,39 @@ const SearchBar = () => {
     marginTop: '-4px',
   };
 
+  function numberWithCommas(x) {
+    const a = x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return a;
+  }
+
   return (
     <div>
       {isMainScroll && (
         <Banner>
           <InBox>
             <img
-              src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2tzEhvBhM6gLpVcCuokwKqoI-B-WWVdrH6g&usqp=CAU"
+              src={productData?.images?.[0]?.url}
               style={styledImg}
               alt="img"
             />
-            <Name>vincent van gogh</Name>
+            <Name>{productData?.name}</Name>
           </InBox>
           <ButtonBox>
             <StyledButton>
               <span style={margin}>구매</span>
-              <div style={margin}>260,000원</div>
+              <div style={margin}>
+                {numberWithCommas(
+                  Math.floor(sizeBox?.buyer_size_price?.[0].price)
+                )}
+              </div>
             </StyledButton>
             <StyledButton sell>
-              <span style={margin}>구매</span>
-              <div style={margin}>260,000원</div>
+              <span style={margin}>판매</span>
+              <div style={margin}>
+                {numberWithCommas(
+                  Math.floor(sizeBox?.seller_size_price?.[0].price)
+                )}
+              </div>
             </StyledButton>
           </ButtonBox>
         </Banner>
@@ -59,7 +72,7 @@ const Banner = styled.div`
   position: fixed;
   display: flex;
   justify-content: space-between;
-  top: 99px;
+  top: 0px;
   width: 100vw;
   padding: 10px 40px 15px;
   background-color: white;

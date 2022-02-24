@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import ChartBtn from './ChartBtn';
 import PriceChart from './PriceChart';
 
 const ChartBox = () => {
+  const { id } = useParams();
   const [chartData, setChartData] = useState([]);
   const [openChart, setOpenChart] = useState({
-    first: true,
+    first: false,
     second: false,
-    third: false,
+    third: true,
   });
+  const [A, setA] = useState(0);
 
-  const onClickBtn = x => {
+  const onClickBtn = (x, id) => {
     let obj = {
       first: false,
       second: false,
@@ -19,10 +22,12 @@ const ChartBox = () => {
     };
     obj[x] = true;
     setOpenChart(obj);
+
+    setA(id + 1);
   };
 
   useEffect(() => {
-    fetch(`http://15.164.48.155:8000/products/1/quote`)
+    fetch(`http://15.164.48.155:8000/products/${id}/quote`)
       .then(res => res.json())
       .then(data => {
         setChartData(data?.quote);
@@ -40,12 +45,9 @@ const ChartBox = () => {
     price: changePriceString(x[1].quote),
   }));
 
-  console.log(openChart);
-
   return (
     <ChartOutBox>
-      시세
-      <ChartBtn onClickBtn={onClickBtn} />
+      <ChartBtn onClickBtn={onClickBtn} A={A} />
       <PriceChart
         changePriceString={changePriceString}
         data={data}
@@ -58,7 +60,7 @@ const ChartBox = () => {
 };
 
 const ChartOutBox = styled.div`
-  width: 600px;
+  width: 563px;
 `;
 
 export default ChartBox;

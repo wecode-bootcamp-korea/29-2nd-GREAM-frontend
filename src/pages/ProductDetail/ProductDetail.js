@@ -10,6 +10,7 @@ import BASE_URL from '../config';
 import SIZE_INFO from './sizeInfo';
 import BuyInfo from './BuyInfo';
 import MarketPrice from './MarketPrice';
+import StickyBtnBox from './ProductDetailInfo/DetailBtn/StickyBtnBox';
 import Login from '../../components/Nav/Login/Login';
 
 const ProductDetail = () => {
@@ -29,7 +30,7 @@ const ProductDetail = () => {
   const [handleSize, setHandleSize] = useState(0);
   const [modalTabId, setModalTabId] = useState(1);
 
-  const { id } = useParams(1);
+  const { id } = useParams();
 
   useEffect(() => {
     fetch(`${BASE_URL}products/${id}`)
@@ -209,6 +210,7 @@ const ProductDetail = () => {
   };
   return (
     <Main>
+      <StickyBtnBox productData={productData} sizeBox={sizeBox} />
       <Login
         loginModalState={loginModalState}
         closeLoginModal={closeLoginModal}

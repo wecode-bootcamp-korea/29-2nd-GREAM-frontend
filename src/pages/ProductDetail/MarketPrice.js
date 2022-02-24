@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import MarketPriceTableGroup from './MarketPriceTableGroup';
 import Select from 'react-select';
 import STOCKMARKET_INFO from './sizeInfo2';
+import ChartBox from './PriceChart/ChartBox';
 
 const MarketPrice = ({
   buttonTitle,
@@ -28,7 +29,7 @@ const MarketPrice = ({
           })}
         />
       </TitleBox>
-
+      <ChartBox />
       <Tabs>
         {buttonTitle.map(({ id, title }) => {
           return (
@@ -58,7 +59,10 @@ const MarketPrice = ({
 
 export default MarketPrice;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 const Title = styled.h3`
   font-size: 18px;

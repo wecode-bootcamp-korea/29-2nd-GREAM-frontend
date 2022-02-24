@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { flexAlignCenter } from '../../../styles/mixin';
 
 const Login = ({ loginModalState, closeLoginModal }) => {
-  console.log('login compo', loginModalState);
   const KAKAO_OAUTH_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${process.env.REACT_APP_REST_API_KEY}&redirect_uri=${process.env.REACT_APP_REDIRECT_URI}&response_type=code`;
 
   const [userData, setUserData] = useState({

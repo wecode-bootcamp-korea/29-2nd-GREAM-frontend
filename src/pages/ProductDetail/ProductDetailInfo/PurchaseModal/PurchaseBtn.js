@@ -1,31 +1,34 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-const PurchaseBtn = ({ selectedSize, set, isSell }) => {
+const PurchaseBtn = ({ productBox, selectedSize, set }) => {
   return (
     <Box>
-      <Button isSell={isSell}>
-        {selectedSize === undefined ? set.toLocaleString() : selectedSize}
+      <Button fast>
+        {selectedSize === undefined
+          ? set.toLocaleString()
+          : selectedSize.toLocaleString()}
       </Button>
+      <Button>280,000</Button>
     </Box>
   );
 };
 const Box = styled.div`
   margin-top: 20px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 `;
 
 const Button = styled.button`
-  width: 93%;
-  padding: 24px;
+  width: 48%;
   border: none;
+  padding: 24px;
   border-radius: ${({ theme }) => theme.btnRadius.btnRadius2};
   color: white;
   font-weight: 700;
 
-  ${({ theme, isSell }) => css`}
-  background-color: ${isSell ? theme.palette.green : theme.palette.red}`}
+  ${({ theme, fast }) => css`}
+  background-color: ${fast ? theme.palette.red : theme.palette.black}`}
 `;
 
 export default PurchaseBtn;

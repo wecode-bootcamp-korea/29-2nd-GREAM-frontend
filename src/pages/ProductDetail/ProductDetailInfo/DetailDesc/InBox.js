@@ -1,36 +1,24 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-const InBox = ({ productData, numberWithCommas }) => {
-  function formatDate(date) {
-    let d = new Date(date),
-      month = '' + (d.getMonth() + 1),
-      day = '' + d.getDate(),
-      year = d.getFullYear();
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
-    return [year, month, day].join('-');
-  }
-
+const InBox = ({ productBox }) => {
   return (
-    <StyledWrapBox numberWithCommas={numberWithCommas}>
+    <StyledWrapBox>
       <StyledOutBox>
         <NumComment>모델번호</NumComment>
-        <Num bold>{productData?.model_number}</Num>
+        <Num bold>{productBox[0]?.model_number}</Num>
       </StyledOutBox>
       <StyledOutBox>
         <NumComment>출시일</NumComment>
-        <Num>{formatDate(productData?.release_date)}</Num>
+        <Num>{productBox[0]?.release_date}</Num>
       </StyledOutBox>
       <StyledOutBox>
-        <NumComment>테마</NumComment>
-        <Num>{productData?.theme}</Num>
+        <NumComment>재료</NumComment>
+        <Num>{productBox[0]?.material}</Num>
       </StyledOutBox>
       <StyledOutBox>
         <NumComment primary>발매가</NumComment>
-        <Num primary>
-          {numberWithCommas(Math.floor(productData?.release_price))}원
-        </Num>
+        <Num primary>{productBox[0]?.release_price.toLocaleString()}원</Num>
       </StyledOutBox>
     </StyledWrapBox>
   );

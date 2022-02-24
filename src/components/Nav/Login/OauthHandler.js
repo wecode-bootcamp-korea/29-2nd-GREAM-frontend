@@ -1,19 +1,17 @@
 import React, { useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { flexAlignCenter } from '../../../styles/mixin';
-import { BASE_URL } from '../../../config';
+import { LOGIN_API_URL } from '../../../config';
 
 const OAuthHandler = () => {
   const location = useLocation();
-  const navigate = useNavigate();
 
   useEffect(() => {
     const authorizeCode = location.search.slice(6);
-    fetch(`${BASE_URL}/users/login?code=${authorizeCode}`)
+    fetch(`${LOGIN_API_URL}/users/login?code=${authorizeCode}`)
       .then(res => res.json())
       .then(res => {
-        navigate(-1);
         window.sessionStorage.setItem('JWT', res.access_token);
       });
   }, [location]);

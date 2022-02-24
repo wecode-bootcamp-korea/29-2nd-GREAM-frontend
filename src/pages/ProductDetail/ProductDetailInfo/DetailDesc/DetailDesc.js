@@ -2,12 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import InBox from './InBox';
 
-const DetailDesc = ({ productData, numberWithCommas }) => {
+const DetailDesc = ({ productBox }) => {
   return (
     <DescContainer>
       <DescComment>상품 정보</DescComment>
       <DescBox>
-        <InBox productData={productData} numberWithCommas={numberWithCommas} />
+        <InBox productBox={productBox} />
       </DescBox>
     </DescContainer>
   );

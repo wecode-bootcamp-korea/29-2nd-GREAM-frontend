@@ -1,27 +1,26 @@
 import React from 'react';
 import styled from 'styled-components';
-
-const AuthorDrop = () => {
+import AUTHORDROP_DATA from './AUTHORDROP_DATA';
+const AuthorDrop = ({ handleInput }) => {
   return (
     <FilterName>
       <Cate />
       <SubCate>
-        <div className="check">
-          <input type="checkbox" />
-          <p className="category">작가 1</p>
-        </div>
-        <div className="check">
-          <input type="checkbox" />
-          <p className="category">작가 2</p>
-        </div>
-        <div className="check">
-          <input type="checkbox" />
-          <p className="category">작가 3</p>
-        </div>
-        <div className="check">
-          <input type="checkbox" />
-          <p className="category">작가 4</p>
-        </div>
+        {AUTHORDROP_DATA?.map(({ id, name }) => {
+          return (
+            <div className="check" key={id}>
+              <input
+                type="radio"
+                name="checkbox"
+                value={id}
+                onClick={() => {
+                  handleInput(id);
+                }}
+              />
+              <p className="category">{name} </p>
+            </div>
+          );
+        })}
       </SubCate>
     </FilterName>
   );
@@ -40,6 +39,8 @@ const SubCate = styled.span`
   color: ${props => props.theme.greyColor};
   .check {
     display: flex;
+  
+    }
   }
   .category {
     margin-left: 10px;

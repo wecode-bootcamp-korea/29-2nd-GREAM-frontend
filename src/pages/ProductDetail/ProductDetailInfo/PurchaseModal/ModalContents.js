@@ -1,85 +1,31 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
-const ModalContents = ({
-  sizeBox,
-  setIsOpen,
-  setSelectedSize,
-  setPickedSize,
-  setPriceForTheSize,
-  sell,
-  numberWithCommas,
-}) => {
-  const [changedColor, setChangedColor] = useState({
-    Small: false,
-    Medium: false,
-    Large: false,
-  });
-
-  const onClick = e => {
-    const selectedPrice = e.currentTarget.getAttribute('value');
-    const selectedSize = e.currentTarget.getAttribute('name');
-
-    setIsOpen(true);
-    setSelectedSize(selectedPrice);
-    setChangedColor({ [selectedSize]: true });
-    setPickedSize(selectedPrice);
-    setPriceForTheSize(selectedSize);
-  };
-
-  return sell ? (
+const ModalContents = ({ productBox, setSelectedSize }) => {
+  return (
     <OutBox>
-      {sizeBox?.seller_size_price?.map((x, index) => (
-        <SizeBtn
-          key={index}
-          value={x.price}
-          name={x.size}
-          onClick={onClick}
-          changedColor={changedColor}
-          bold={changedColor[x.size]}
-        >
+      {productBox[0].size.map((x, index) => (
+        <SizeBtn key={index} onClick={() => setSelectedSize(x.price)}>
           <Box>
             <Size>{x.size}</Size>
-            <Price>{numberWithCommas(Math.floor(x.price))}원</Price>
-            {/* {numberWithCommas(Math.floor(x.price))}원 */}
-          </Box>
-        </SizeBtn>
-      ))}
-    </OutBox>
-  ) : (
-    <OutBox>
-      {sizeBox?.buyer_size_price?.map((x, index) => (
-        <SizeBtn
-          key={index}
-          value={x.price}
-          name={x.size}
-          onClick={onClick}
-          changedColor={changedColor}
-          bold={changedColor[x.size]}
-        >
-          <Box>
-            <Size>{x.size}</Size>
-            <Price>{numberWithCommas(Math.floor(x.price))}원</Price>
+            <Price>{x.price.toLocaleString()}</Price>
           </Box>
         </SizeBtn>
       ))}
     </OutBox>
   );
 };
-
 const OutBox = styled.div`
   padding: 20px;
 `;
 
 const SizeBtn = styled.button`
   width: 100%;
+  border: 0.2px solid ${({ theme }) => theme.palette.grey};
   border-radius: ${({ theme }) => theme.btnRadius.btnRadius2};
   background-color: white;
   padding: 16px;
   margin-bottom: 10px;
-
-  ${({ bold }) =>
-    bold ? `border : 3px solid black` : `border: 0.8px solid black`}
 `;
 
 const Box = styled.div`

@@ -5,9 +5,6 @@ import ScrollToTop from './components/ScrollToTop./ScrollToTop';
 import ProductDetail from './pages/ProductDetail/ProductDetail';
 import ProductsList from './pages/ProductsList/ProductsList';
 import OAuthHandler from './components/Nav/Login/OauthHandler';
-import ChartBox from './pages/ProductDetail/PriceChart/ChartBox';
-import Logout from './components/Nav/Login/Logout';
-import StickyBtnBox from './pages/ProductDetail/ProductDetailInfo/DetailBtn/StickyBtnBox';
 
 const Router = () => {
   return (
@@ -18,9 +15,6 @@ const Router = () => {
         <Route path="/product/:id" element={<ProductDetail />} />
         <Route path="/list" element={<ProductsList />} />
         <Route path="/oauth" element={<OAuthHandler />} />
-        <Route path="/chart" element={<ChartBox />} />
-        <Route path="/logout" element={<Logout />} />
-        <Route path="/btn" element={<StickyBtnBox />} />
       </Routes>
     </BrowserRouter>
   );

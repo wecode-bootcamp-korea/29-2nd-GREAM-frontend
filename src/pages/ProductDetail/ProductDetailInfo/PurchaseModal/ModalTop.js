@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ModalTop = ({ productData }) => {
+const ModalTop = ({ productBox }) => {
   const imgStyles = {
     width: '80px',
     height: '80px',
@@ -11,10 +11,10 @@ const ModalTop = ({ productData }) => {
   return (
     <Top>
       <InfoOutBox>
-        <img src={productData?.images?.[0]?.url} alt="img" style={imgStyles} />
+        <img src={productBox[0].img} alt="img" style={imgStyles} />
         <InfoBox>
-          <ModelNum>{productData?.model_number}</ModelNum>
-          <Name>{productData?.name}</Name>
+          <ModelNum>{productBox[0].model_number}</ModelNum>
+          <Name>{productBox[0].product_name}</Name>
         </InfoBox>
       </InfoOutBox>
     </Top>

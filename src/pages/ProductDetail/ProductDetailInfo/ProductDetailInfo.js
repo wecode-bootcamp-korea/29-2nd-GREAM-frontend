@@ -64,7 +64,7 @@ const ProductDetailInfo = ({
         <TransactionAmountComment>최근 거래가</TransactionAmountComment>
         <TransactionAmount>
           {pickedSize !== null
-            ? pickedSize
+            ? numberWithCommas(Math.floor(pickedSize)) + '원'
             : numberWithCommas(Math.floor(productData?.recent_price)) + '원'}
         </TransactionAmount>
       </TransactionAmountBox>

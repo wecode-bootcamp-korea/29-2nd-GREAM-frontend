@@ -10,6 +10,7 @@ import BASE_URL from '../config';
 import SIZE_INFO from './sizeInfo';
 import BuyInfo from './BuyInfo';
 import MarketPrice from './MarketPrice';
+import Login from '../../components/Nav/Login/Login';
 
 const ProductDetail = () => {
   const [productData, setProductData] = useState(null);
@@ -17,6 +18,7 @@ const ProductDetail = () => {
   const [isToggle, setIsToggle] = useState({
     favoriteModalBtn: false,
     marketPriceBtn: false,
+    login: false,
   });
   const [isClickBtn, setIsClickBtn] = useState({
     Small: false,
@@ -71,6 +73,9 @@ const ProductDetail = () => {
 
   const renderNumber = renderInterestedNum(productInterestedNum);
 
+  const [loginModalState, setLoginModalState] = useState(false);
+  const closeLoginModal = () => setLoginModalState(false);
+
   const clickToggle = e => {
     if (sessionStorage.getItem('JWT')) {
       const selectedModalBtn = e.currentTarget.getAttribute('name');
@@ -81,7 +86,8 @@ const ProductDetail = () => {
         };
       });
     } else {
-      alert('로그인 해주세요');
+      setLoginModalState(prev => prev || true);
+      setIsToggle(prev => ({ ...prev, login: true }));
     }
   };
 
@@ -194,10 +200,19 @@ const ProductDetail = () => {
         handleSize={handleSize}
       />
     ),
+    Login: (
+      <Login
+        loginModalState={loginModalState}
+        closeLoginModal={closeLoginModal}
+      />
+    ),
   };
-
   return (
     <Main>
+      <Login
+        loginModalState={loginModalState}
+        closeLoginModal={closeLoginModal}
+      />
       <MainContent>
         {productData && (
           <SliderWrapper>
@@ -236,8 +251,12 @@ const ProductDetail = () => {
           </MarketPriceBtnWrapper>
           <BuyInfo />
         </InfoWrraper>
-        {isToggle.favoriteModalBtn && ModalListObj.favoriteModal}
+        {window.sessionStorage.getItem('JWT') !== null &&
+        isToggle.favoriteModalBtn === true
+          ? ModalListObj.favoriteModal
+          : 'hello'}
         {isToggle.marketPriceBtn && ModalListObj.marketPriceModal}
+        {isToggle.favoriteModalBtn && ModalListObj.Login}
       </MainContent>
     </Main>
   );

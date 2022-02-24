@@ -104,7 +104,11 @@ const ProductDetailInfo = ({
             numberWithCommas={numberWithCommas}
           />
           {isOpen && (
-            <PurchaseBtn sizeBox={sizeBox} selectedSize={selectedSize} />
+            <PurchaseBtn
+              sizeBox={sizeBox}
+              selectedSize={selectedSize}
+              numberWithCommas={numberWithCommas}
+            />
           )}
         </Modal>
         <Modal
@@ -123,7 +127,12 @@ const ProductDetailInfo = ({
             numberWithCommas={numberWithCommas}
           />
           {isOpen && (
-            <PurchaseBtn sizeBox={sizeBox} selectedSize={selectedSize} isSell />
+            <PurchaseBtn
+              sizeBox={sizeBox}
+              selectedSize={selectedSize}
+              numberWithCommas={numberWithCommas}
+              isSell
+            />
           )}
         </Modal>
         <Modal

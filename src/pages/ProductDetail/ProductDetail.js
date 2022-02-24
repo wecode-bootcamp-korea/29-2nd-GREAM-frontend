@@ -38,14 +38,6 @@ const ProductDetail = () => {
   }, [id]);
 
   useEffect(() => {
-    fetch('/data/Products.json')
-      .then(res => res.json())
-      .then(data => {
-        setProductBox(data);
-      });
-  }, []);
-
-  useEffect(() => {
     fetch(`${BASE_URL}products/${id}/order`)
       .then(res => res.json())
       .then(data => setBiddingData(data.orders));

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { flexAlignCenter } from '../../../styles/mixin';
+import { BASE_URL } from '../../../config';
 
 const SearchBar = ({ searchBarState, closeSearchBar }) => {
   const [searchKeyword, setSearchKeyword] = useState('');
@@ -17,7 +18,7 @@ const SearchBar = ({ searchBarState, closeSearchBar }) => {
   };
 
   useEffect(() => {
-    fetch('http://15.164.48.155:8000/products/search', {
+    fetch(`${BASE_URL}/products/search`, {
       method: 'POST',
       body: JSON.stringify({ keyword: searchKeyword }),
     })
@@ -82,7 +83,7 @@ const SearchBar = ({ searchBarState, closeSearchBar }) => {
               <ProductList
                 key={content.id}
                 onClick={() => {
-                  navigate(`/detail/${content.id}`);
+                  navigate(`/product/${content.id}`);
                   closeSearchBar();
                   deleteAll();
                 }}

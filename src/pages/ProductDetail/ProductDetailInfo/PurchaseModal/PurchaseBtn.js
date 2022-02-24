@@ -1,11 +1,13 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
-const PurchaseBtn = ({ selectedSize, set, isSell }) => {
+const PurchaseBtn = ({ selectedSize, set, isSell, numberWithCommas }) => {
   return (
     <Box>
       <Button isSell={isSell}>
-        {selectedSize === undefined ? set.toLocaleString() : selectedSize}
+        {selectedSize === undefined
+          ? set.toLocaleString()
+          : numberWithCommas(Math.floor(selectedSize)) + '원'}
       </Button>
     </Box>
   );

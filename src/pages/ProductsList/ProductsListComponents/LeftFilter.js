@@ -11,13 +11,12 @@ import ExhibitDrop from './ExhibitDrop ';
 import Price from './Price';
 import PriceDrop from './PriceDrop';
 
-const LeftFilter = () => {
+const LeftFilter = ({ setList }) => {
   const [hiFilter, setHiFilter] = useState(false);
   const [theme, setTheme] = useState(false);
   const [size, setSize] = useState(false);
   const [exhibit, setExhibit] = useState(false);
   const [price, setPrice] = useState(false);
-
   const AuthorToggle = () => {
     setHiFilter(!hiFilter);
   };
@@ -28,7 +27,6 @@ const LeftFilter = () => {
 
   const sizeToggle = e => {
     setSize(!size);
-    e.stopPropagation();
   };
 
   const exhibitToggle = () => {
@@ -38,6 +36,15 @@ const LeftFilter = () => {
   const priceToggle = () => {
     setPrice(!price);
   };
+
+  const handleInput = id => {
+    fetch(`http://13.124.44.115:8080/products?author=${id}`)
+      .then(res => res.json())
+      .then(result => {
+        setList(result.product_list);
+      });
+  };
+
   return (
     <Left>
       <Filter>
@@ -47,7 +54,7 @@ const LeftFilter = () => {
         <FilterTitle onClick={AuthorToggle}>
           <Author />
         </FilterTitle>
-        {hiFilter ? <AuthorDrop /> : null}
+        {hiFilter ? <AuthorDrop handleInput={handleInput} /> : null}
 
         <FilterTitle onClick={themeToggle}>
           <Theme />
@@ -89,7 +96,6 @@ const FilterTitle = styled.div`
   padding: 20px 0;
   justify-content: space-between;
   border-bottom: 1px solid gray;
-  /* background: teal; */
 `;
 
 export default LeftFilter;

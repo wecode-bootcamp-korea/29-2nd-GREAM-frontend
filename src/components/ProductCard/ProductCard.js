@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBookmark, faLight } from '@fortawesome/free-solid-svg-icons';
+import { faBookmark } from '@fortawesome/free-solid-svg-icons';
 import styled from 'styled-components';
 
-const Card = ({ product_image, author, name, price }) => {
+const Card = ({ product_image, author, name, price, wishlist_count }) => {
   return (
     <ProductCard>
       <ProductLink to="#">
@@ -22,7 +22,7 @@ const Card = ({ product_image, author, name, price }) => {
         </Price>
         <LikeCount>
           <FontAwesomeIcon icon={faBookmark} />
-          <Count>4.5만</Count>
+          <Count>{wishlist_count}</Count>
           <span>⏍</span>
           <Count>4.5만</Count>
         </LikeCount>
@@ -32,7 +32,7 @@ const Card = ({ product_image, author, name, price }) => {
 };
 
 const ProductCard = styled.div`
-  width: 22.9%;
+  width: 22.5%
   margin: 20px 10px;
   border: 1px solid ${props => props.theme.greyColor};
   border-radius: 12px;

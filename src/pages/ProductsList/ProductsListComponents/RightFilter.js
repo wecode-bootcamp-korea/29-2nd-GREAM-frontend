@@ -1,27 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Card from '../../../components/ProductCard/ProductCard';
-const RightFilter = () => {
-  const [list, setList] = useState([]);
+import SORT_LISTBTN from './SORT_LISTBTN';
+import SortBtn from './SortBtn';
 
-  useEffect(() => {
-    fetch('http://13.124.44.115:8080/products')
-      .then(res => res.json())
-      .then(result => setList(result.product_list));
-  }, []);
-
+const RightFilter = ({ sorted, changeSort }) => {
   return (
     <Right>
       <Sorting>
-        <Popular>인기순✔️</Popular>
+        {/* {SORT_LISTBTN.map(({ id, name }) => {
+          return (
+            <SortBtn type="button" key={id} name={name} onClick={changeSort}>
+              {name}
+            </SortBtn>
+          );
+        })} */}
       </Sorting>
       <Products>
-        {list.length > 0 &&
-          list.map(({ id, author, name, price, product_image }) => {
+        {sorted.length > 0 &&
+          sorted.map(({ id, author, name, price, image }) => {
             return (
               <Card
                 key={id}
-                product_image={product_image[0].image}
+                product_image={image}
                 author={author}
                 name={name}
                 price={price}
@@ -40,22 +41,11 @@ const Right = styled.div`
 const Sorting = styled.div`
   height: 68px;
   padding: 23px 0 15px;
+  display: flex;
 `;
-
-const Popular = styled.button`
-  padding: 0;
-  background-color: #fff;
-  border: none;
-  font-weight: 600;
-  font-size: 15px;
-  float: right;
-  cursor: pointer;
-`;
-
 const Products = styled.div`
   display: flex;
   width: 100%;
   object-fit: cover;
 `;
-
 export default RightFilter;

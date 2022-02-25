@@ -17,9 +17,9 @@ const SearchBar = ({ productData, sizeBox }) => {
   }, []);
 
   const styledImg = {
-    width: '60px',
-    height: '60px',
-    borderRadius: '10px',
+    width: '100px',
+    height: '100px',
+    borderRadius: '20px',
   };
 
   const margin = {
@@ -28,10 +28,11 @@ const SearchBar = ({ productData, sizeBox }) => {
   };
 
   function numberWithCommas(x) {
-    const a = x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    return a;
+    const convertPrice = (
+      Math.floor(parseInt(x) / 1000) * 1000
+    ).toLocaleString();
+    return convertPrice + '원';
   }
-
   return (
     <div>
       {isMainScroll && (
@@ -42,7 +43,10 @@ const SearchBar = ({ productData, sizeBox }) => {
               style={styledImg}
               alt="img"
             />
-            <Name>{productData?.name}</Name>
+            <Name>
+              <p>작가명 : {productData?.author}</p>
+              <span>작품명 : {productData?.name}</span>
+            </Name>
           </InBox>
           <ButtonBox>
             <StyledButton>
@@ -78,16 +82,28 @@ const Banner = styled.div`
   background-color: white;
   box-shadow: 4px 0 10px 0 rgb(0 0 0 / 10%);
   z-index: 1;
+  height: 200px;
 `;
 
 const InBox = styled.div`
   display: flex;
   width: 100%;
+  align-items: center;
 `;
 
 const Name = styled.div`
-  font-size: ${({ theme }) => theme.fontsize.fontSize2};
-  margin: 5px 10px;
+  font-size: ${({ theme }) => theme.fontsize.fontSize4};
+  margin: 10px 10px;
+  p {
+    padding: 4px 0;
+    font-weight: 600;
+    color: ${({ theme }) => theme.palette.black};
+  }
+  span {
+    padding: 4px 0;
+    font-weight: 600;
+    color: ${({ theme }) => theme.palette.black};
+  }
 `;
 
 const ButtonBox = styled.div`

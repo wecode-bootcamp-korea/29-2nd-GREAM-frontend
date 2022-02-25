@@ -85,7 +85,7 @@ const NavWrapper = styled.div`
 `;
 
 const LogoImg = styled.img`
-  width: 8vw;
+  width: 6vw;
   height: auto;
   cursor: pointer;
 `;
@@ -93,18 +93,18 @@ const LogoImg = styled.img`
 const LogoCharImg = styled.img`
   padding-bottom: 5vh;
   margin-left: 3vw;
-  width: 8vw;
+  width: 6vw;
   cursor: pointer;
 `;
 
 const RightSide = styled.div`
   display: flex;
   align-items: baseline;
-  font-size: 1.2vw;
+  font-size: 0.8vw;
   font-weight: bold;
 
   span {
-    margin-left: 1vw;
+    margin-left: 0.5vw;
   }
 `;
 
@@ -115,7 +115,7 @@ const RightBtn = styled.div`
 const Icon = styled.span`
   margin-right: 1.2vw;
   color: black;
-  font-size: 1.4vw;
+  font-size: 0.8vw;
   cursor: pointer;
 `;
 

@@ -95,11 +95,14 @@
   <img src="https://i.ibb.co/KFVc4WY/chart-modal.gif" alt="chart-modal" border="0">
 
 - 시세영역과 시세 모달창 영역간의 데이터 교류를 통해 실시간으로 연동 사이즈버튼을 누르면 해당 사이즈 조건에 맞는 거래내역들이 나옴 이 내역들은 모달창에서 바로 확인가능 반대로 모달창에서 눌러도 모달창 외부 시세영역과 데이터 연동
+  
   <img src="https://i.ibb.co/Pw8q4zG/quotemodal.gif" alt="quotemodal" border="0">
 - 구매 전 확인 부분 드롭다운 형태로 구현
+  
   <img src="https://i.ibb.co/D74YvFh/dropdown-buyinfo.gif" alt="dropdown-buyinfo" border="0">
 - 추천상품에서 해당 상품을 누르면 해당상품 상세페이지로 이동
 - 더보기를 누르면 더보기로 이동
+  
   <img src="https://i.ibb.co/1GWLXMn/relatedproduct.gif" alt="relatedproduct" border="0">
 
 ## **Build Installation**

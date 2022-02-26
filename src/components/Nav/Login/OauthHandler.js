@@ -19,16 +19,16 @@ const OAuthHandler = () => {
   }, [location]);
 
   return (
-    <OAth>
+    <OAuth>
       <Content>
         <img alt="logo_character" src="/images/logo_character.jpg" />
         <div> 소셜 로그인 진행 중 :) </div>
       </Content>
-    </OAth>
+    </OAuth>
   );
 };
 
-const OAth = styled.div`
+const OAuth = styled.div`
   position: fixed;
   top: 0;
   right: 0;

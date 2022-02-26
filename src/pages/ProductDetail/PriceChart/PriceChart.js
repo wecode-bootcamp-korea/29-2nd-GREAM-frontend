@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const PriceChart = ({ data, changePriceString, convertData, openChart }) => {
   return (
     <OutBox>
-      {openChart.first && (
+      {openChart?.first && (
         <Box>
           <Chart
             data={data}
@@ -14,21 +14,21 @@ const PriceChart = ({ data, changePriceString, convertData, openChart }) => {
           />
         </Box>
       )}
-      {openChart.second && (
+      {openChart?.second && (
         <Box>
           <Chart
             data={data}
             changePriceString={changePriceString}
-            convertData={convertData?.slice(8, 15)}
+            convertData={convertData?.slice(0, 15)}
           />
         </Box>
       )}
-      {openChart.third && (
+      {openChart?.third && (
         <Box>
           <Chart
             data={data}
             changePriceString={changePriceString}
-            convertData={convertData?.slice(16, 23)}
+            convertData={convertData?.slice(0, 29)}
           />
         </Box>
       )}
@@ -36,7 +36,11 @@ const PriceChart = ({ data, changePriceString, convertData, openChart }) => {
   );
 };
 
-const OutBox = styled.div``;
-const Box = styled.div``;
+const OutBox = styled.div`
+  height: 200px;
+`;
+const Box = styled.div`
+  height: 200px;
+`;
 
 export default PriceChart;

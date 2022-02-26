@@ -29,7 +29,7 @@ const InBox = ({ productData, numberWithCommas }) => {
       <StyledOutBox>
         <NumComment primary>발매가</NumComment>
         <Num primary>
-          {numberWithCommas(Math.floor(productData?.release_price))}원
+          {numberWithCommas(Math.floor(productData?.release_price))}
         </Num>
       </StyledOutBox>
     </StyledWrapBox>

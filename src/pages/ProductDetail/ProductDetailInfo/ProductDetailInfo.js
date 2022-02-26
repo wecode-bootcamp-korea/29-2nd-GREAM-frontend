@@ -20,21 +20,18 @@ const ProductDetailInfo = ({
   renderNumber,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-
   const [purchaseModal, setPurchaseModal] = useState(false);
   const [sellModal, setSellModal] = useState(false);
   const [sizeModal, setSizeModal] = useState(false);
-
   const [pickedSize, setPickedSize] = useState(null);
-
   const SIZE_INIT = '모든 사이즈';
+  const [selectedSize, setSelectedSize] = useState(null);
   const [priceForTheSize, setPriceForTheSize] = useState(SIZE_INIT);
-
-  const [selectedSize, setSelectedSize] = useState('');
-
   function numberWithCommas(x) {
-    const a = x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    return a;
+    const convertPrice = (
+      Math.floor(parseInt(x) / 1000) * 1000
+    ).toLocaleString();
+    return convertPrice + '원';
   }
 
   const customStyles = {
@@ -64,17 +61,15 @@ const ProductDetailInfo = ({
         <TransactionAmountComment>최근 거래가</TransactionAmountComment>
         <TransactionAmount>
           {pickedSize !== null
-            ? numberWithCommas(Math.floor(pickedSize)) + '원'
-            : numberWithCommas(Math.floor(productData?.recent_price)) + '원'}
+            ? numberWithCommas(pickedSize)
+            : numberWithCommas(productData?.recent_price)}
         </TransactionAmount>
       </TransactionAmountBox>
       <AmountBox>
         <Button onClick={() => setPurchaseModal(true)}>
           <span style={margin}>구매</span>
           <div>
-            {numberWithCommas(
-              Math.floor(sizeBox?.buyer_size_price?.[0].price)
-            ) + '원'}
+            {numberWithCommas(Math.floor(sizeBox?.buyer_size_price?.[0].price))}
           </div>
         </Button>
         <Button onClick={() => setSellModal(true)} sell>
@@ -82,7 +77,7 @@ const ProductDetailInfo = ({
           <div>
             {numberWithCommas(
               Math.floor(sizeBox?.seller_size_price?.[0].price)
-            ) + '원'}
+            )}
           </div>
         </Button>
         <Modal
@@ -98,7 +93,6 @@ const ProductDetailInfo = ({
           <ModalContents
             sizeBox={sizeBox}
             setSelectedSize={setSelectedSize}
-            // setPickedSize={setPickedSize}
             setIsOpen={setIsOpen}
             isOpen={isOpen}
             numberWithCommas={numberWithCommas}
@@ -122,7 +116,6 @@ const ProductDetailInfo = ({
             setSelectedSize={setSelectedSize}
             setIsOpen={setIsOpen}
             isOpen={isOpen}
-            // setPickedSize={setPickedSize}
             sell
             numberWithCommas={numberWithCommas}
           />

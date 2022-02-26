@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import BASE_URL from '../config';
+import styled from 'styled-components';
+import Login from '../../components/Nav/Login/Login';
+import ProductCard from '../../components/ProductCard/ProductCard';
+import Btn from './Btn';
 import ProductDetailInfo from './ProductDetailInfo/ProductDetailInfo';
 import ProductDetailSlider from './ProductDetailSlider';
-import styled from 'styled-components';
-import Btn from './Btn';
 import FavoriteModal from './FavoriteModal';
 import MarketPriceModal from './MarketPriceModal';
-import { useParams } from 'react-router-dom';
-import BASE_URL from '../config';
-import SIZE_INFO from './sizeInfo';
-import BuyInfo from './BuyInfo';
 import MarketPrice from './MarketPrice';
+import StickyBtnBox from './ProductDetailInfo/DetailBtn/StickyBtnBox';
+import BuyInfo from './BuyInfo';
+import SIZE_INFO from './sizeInfo';
 
 const ProductDetail = () => {
   const [productData, setProductData] = useState(null);
@@ -17,6 +20,7 @@ const ProductDetail = () => {
   const [isToggle, setIsToggle] = useState({
     favoriteModalBtn: false,
     marketPriceBtn: false,
+    login: false,
   });
   const [isClickBtn, setIsClickBtn] = useState({
     Small: false,
@@ -26,8 +30,9 @@ const ProductDetail = () => {
 
   const [handleSize, setHandleSize] = useState(0);
   const [modalTabId, setModalTabId] = useState(1);
+  const [loginModalState, setLoginModalState] = useState(false);
 
-  const { id } = useParams(1);
+  const { id } = useParams();
 
   useEffect(() => {
     fetch(`${BASE_URL}products/${id}`)
@@ -48,8 +53,10 @@ const ProductDetail = () => {
   const productId = productData?.product_id;
   const productAuthor = productData?.author;
   const productInterestedNum = productData?.wishlist.length;
+
   const isModalOpen = isToggle.marketPriceBtn === true;
   sessionStorage.setItem(productId, JSON.stringify(isClickBtn));
+
   const savedBookMark = JSON.parse(sessionStorage.getItem(productId));
   const isCheckedBookMark = Object.values(savedBookMark).indexOf(true);
 
@@ -71,6 +78,8 @@ const ProductDetail = () => {
 
   const renderNumber = renderInterestedNum(productInterestedNum);
 
+  const closeLoginModal = () => setLoginModalState(false);
+
   const clickToggle = e => {
     if (sessionStorage.getItem('JWT')) {
       const selectedModalBtn = e.currentTarget.getAttribute('name');
@@ -81,7 +90,8 @@ const ProductDetail = () => {
         };
       });
     } else {
-      alert('로그인 해주세요');
+      setLoginModalState(prev => prev || true);
+      setIsToggle(prev => ({ ...prev, login: true }));
     }
   };
 
@@ -198,6 +208,8 @@ const ProductDetail = () => {
 
   return (
     <Main>
+      <StickyBtnBox productData={productData} sizeBox={sizeBox} />
+
       <MainContent>
         {productData && (
           <SliderWrapper>
@@ -236,9 +248,34 @@ const ProductDetail = () => {
           </MarketPriceBtnWrapper>
           <BuyInfo />
         </InfoWrraper>
-        {isToggle.favoriteModalBtn && ModalListObj.favoriteModal}
         {isToggle.marketPriceBtn && ModalListObj.marketPriceModal}
+        {isToggle.favoriteModalBtn && ModalListObj.favoriteModal}
+        <Login
+          loginModalState={loginModalState}
+          closeLoginModal={closeLoginModal}
+        />
       </MainContent>
+      <RelProductBox>
+        <RelProductTitleBox>
+          <span>{productData?.category} 부문 추천작품</span>
+          <Link to="/list">
+            <span>더보기</span>
+          </Link>
+        </RelProductTitleBox>
+        <RelProductContents>
+          {productData?.category_product.slice(1, 5).map(relProduct => (
+            <ProductCard
+              key={relProduct.product_id}
+              id={relProduct.product_id}
+              name={relProduct.product_name}
+              price={relProduct.product_price}
+              product_image={relProduct.product_url}
+              onClick
+            />
+          ))}
+        </RelProductContents>
+      </RelProductBox>
+      <Footer />
     </Main>
   );
 };
@@ -287,4 +324,50 @@ const HeightMarketPriceBtn = styled(Btn)`
     font-size: ${({ theme }) => theme.fontsize.fontSize1};
     color: ${({ theme }) => theme.palette.darkGrey};
   }
+`;
+
+const RelProductBox = styled.div`
+  display: flex;
+  max-width: 1280px;
+  flex-direction: column;
+  margin: 0 auto;
+  a {
+    text-decoration: none;
+  }
+`;
+
+const RelProductTitleBox = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 0 30px;
+  margin-bottom: 40px;
+  font-weight: 600;
+
+  a {
+    font-size: ${({ theme }) => theme.fontsize.fontSize0};
+    color: ${({ theme }) => theme.palette.grey};
+    text-decoration: none;
+  }
+
+  a:link {
+    text-decoration: none;
+    color: ${({ theme }) => theme.palette.grey};
+  }
+
+  a:visited {
+    text-decoration: none;
+    color: ${({ theme }) => theme.palette.grey};
+  }
+`;
+
+const RelProductContents = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin: 0 auto;
+`;
+
+const Footer = styled.div`
+  height: 100px;
 `;

@@ -1,4 +1,3 @@
-import { fontFace } from 'polished';
 import React from 'react';
 import {
   LineChart,
@@ -6,7 +5,6 @@ import {
   XAxis,
   YAxis,
   Tooltip,
-  Legend,
   ResponsiveContainer,
 } from 'recharts';
 import styled from 'styled-components';
@@ -21,7 +19,7 @@ const Chart = ({ data, changePriceString, convertData }) => {
 
   return (
     <Charts>
-      <ResponsiveContainer width="80%" height="80%" aspect={3 / 1}>
+      <ResponsiveContainer width="563px" height="600px" aspect={3 / 1}>
         <LineChart data={convertData} width={500} height={300}>
           <XAxis dataKey="date" stroke="5550bd" />
           <YAxis orientation="right" stroke="" />
@@ -43,8 +41,6 @@ const Chart = ({ data, changePriceString, convertData }) => {
 };
 
 const Charts = styled(ResponsiveContainer)`
-  width: 100%;
-  margin-left: 10px;
   margin-top: 30px;
 
   .recharts-layer.recharts-cartesian-axis.recharts-xAxis.xAxis {

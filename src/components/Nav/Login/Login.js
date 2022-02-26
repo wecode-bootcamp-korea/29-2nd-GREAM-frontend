@@ -9,7 +9,6 @@ const Login = ({ loginModalState, closeLoginModal }) => {
     id: '',
     pw: '',
   });
-
   const handleInput = e => {
     const { name, value } = e.target;
     setUserData(prev => ({ ...prev, [name]: value }));
@@ -71,7 +70,6 @@ const Login = ({ loginModalState, closeLoginModal }) => {
     );
   }
 };
-
 const Overlay = styled.div`
   position: fixed;
   top: 0;

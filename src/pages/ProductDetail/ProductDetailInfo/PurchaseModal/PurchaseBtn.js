@@ -7,7 +7,7 @@ const PurchaseBtn = ({ selectedSize, set, isSell, numberWithCommas }) => {
       <Button isSell={isSell}>
         {selectedSize === undefined
           ? set.toLocaleString()
-          : numberWithCommas(Math.floor(selectedSize)) + '원'}
+          : numberWithCommas(Math.floor(selectedSize))}
       </Button>
     </Box>
   );

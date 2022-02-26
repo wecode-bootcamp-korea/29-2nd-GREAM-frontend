@@ -86,7 +86,7 @@ const Tabs = styled.div`
 const Tab = styled.button`
   flex: 1 0 20%;
   padding: 4px;
-  margin: 2px;
+  margin: 4px;
   height: 35px;
   font-weight: ${props => (props.active ? '600' : '400')};
   font-size: ${({ theme }) => theme.fontsize.fontSize0};

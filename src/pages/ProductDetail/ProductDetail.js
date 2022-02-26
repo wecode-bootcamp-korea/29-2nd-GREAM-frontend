@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from 'react';
+import { useParams, Link } from 'react-router-dom';
+import BASE_URL from '../config';
+import styled from 'styled-components';
+import Login from '../../components/Nav/Login/Login';
+import ProductCard from '../../components/ProductCard/ProductCard';
+import Btn from './Btn';
 import ProductDetailInfo from './ProductDetailInfo/ProductDetailInfo';
 import ProductDetailSlider from './ProductDetailSlider';
-import styled from 'styled-components';
-import Btn from './Btn';
 import FavoriteModal from './FavoriteModal';
 import MarketPriceModal from './MarketPriceModal';
-import { useParams } from 'react-router-dom';
-import BASE_URL from '../config';
-import SIZE_INFO from './sizeInfo';
-import BuyInfo from './BuyInfo';
 import MarketPrice from './MarketPrice';
 import StickyBtnBox from './ProductDetailInfo/DetailBtn/StickyBtnBox';
-import Login from '../../components/Nav/Login/Login';
-import { Link } from 'react-router-dom';
-import ProductCard from '../../components/ProductCard/ProductCard';
+import BuyInfo from './BuyInfo';
+import SIZE_INFO from './sizeInfo';
 
 const ProductDetail = () => {
   const [productData, setProductData] = useState(null);
@@ -31,6 +30,7 @@ const ProductDetail = () => {
 
   const [handleSize, setHandleSize] = useState(0);
   const [modalTabId, setModalTabId] = useState(1);
+  const [loginModalState, setLoginModalState] = useState(false);
 
   const { id } = useParams();
 
@@ -53,8 +53,10 @@ const ProductDetail = () => {
   const productId = productData?.product_id;
   const productAuthor = productData?.author;
   const productInterestedNum = productData?.wishlist.length;
+
   const isModalOpen = isToggle.marketPriceBtn === true;
   sessionStorage.setItem(productId, JSON.stringify(isClickBtn));
+
   const savedBookMark = JSON.parse(sessionStorage.getItem(productId));
   const isCheckedBookMark = Object.values(savedBookMark).indexOf(true);
 
@@ -76,7 +78,6 @@ const ProductDetail = () => {
 
   const renderNumber = renderInterestedNum(productInterestedNum);
 
-  const [loginModalState, setLoginModalState] = useState(false);
   const closeLoginModal = () => setLoginModalState(false);
 
   const clickToggle = e => {
@@ -203,20 +204,12 @@ const ProductDetail = () => {
         handleSize={handleSize}
       />
     ),
-    Login: (
-      <Login
-        loginModalState={loginModalState}
-        closeLoginModal={closeLoginModal}
-      />
-    ),
   };
+
   return (
     <Main>
       <StickyBtnBox productData={productData} sizeBox={sizeBox} />
-      <Login
-        loginModalState={loginModalState}
-        closeLoginModal={closeLoginModal}
-      />
+
       <MainContent>
         {productData && (
           <SliderWrapper>
@@ -255,12 +248,12 @@ const ProductDetail = () => {
           </MarketPriceBtnWrapper>
           <BuyInfo />
         </InfoWrraper>
-        {window.sessionStorage.getItem('JWT') !== null &&
-        isToggle.favoriteModalBtn === true
-          ? ModalListObj.favoriteModal
-          : ''}
         {isToggle.marketPriceBtn && ModalListObj.marketPriceModal}
-        {isToggle.favoriteModalBtn && ModalListObj.Login}
+        {isToggle.favoriteModalBtn && ModalListObj.favoriteModal}
+        <Login
+          loginModalState={loginModalState}
+          closeLoginModal={closeLoginModal}
+        />
       </MainContent>
       <RelProductBox>
         <RelProductTitleBox>

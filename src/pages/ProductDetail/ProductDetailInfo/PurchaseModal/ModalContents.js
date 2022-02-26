@@ -40,7 +40,7 @@ const ModalContents = ({
         >
           <Box>
             <Size>{x.size}</Size>
-            <Price>{numberWithCommas(Math.floor(x.price))}원</Price>
+            <Price>{numberWithCommas(Math.floor(x.price))}</Price>
           </Box>
         </SizeBtn>
       ))}
@@ -58,7 +58,7 @@ const ModalContents = ({
         >
           <Box>
             <Size>{x.size}</Size>
-            <Price>{numberWithCommas(Math.floor(x.price))}원</Price>
+            <Price>{numberWithCommas(Math.floor(x.price))}</Price>
           </Box>
         </SizeBtn>
       ))}

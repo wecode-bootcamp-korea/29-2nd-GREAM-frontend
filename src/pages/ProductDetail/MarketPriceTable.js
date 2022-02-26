@@ -76,8 +76,9 @@ const TableBody = styled.tbody`
     td:nth-child(2) {
       padding-right: ${props =>
         (props.modal && props.tabId === 2) || (props.modal && props.tabId === 3)
-          ? '20px'
+          ? '10px'
           : '0'};
+
       font-weight: ${props =>
         props.tabId === 2 || props.tabId === 3 ? '600' : '400'};
       text-align: right;
